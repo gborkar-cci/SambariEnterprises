@@ -1,0 +1,160 @@
+﻿@model SambariEnterprises.ViewModels.RegistrationViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Create", "Members", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PharmacyName, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.PharmacyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Pharmacy Name" } })
+            @Html.ValidationMessageFor(model => model.PharmacyName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Constitution, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.RadioButtonFor(model => model.Constitution, "proprietorship", new { htmlAttributes = new { @class = "form-control" } }) Proprietorship
+            @Html.RadioButtonFor(model => model.Constitution, "partnership", new { htmlAttributes = new { @class = "form-control" } }) Partnership
+            @Html.RadioButtonFor(model => model.Constitution, "oowner", new { htmlAttributes = new { @class = "form-control" } }) Owner
+            <br />@Html.ValidationMessageFor(model => model.Constitution, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OwnerName, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control", placeholder = "Owner Name" } })
+            @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactPersonName, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control", placeholder = "Contact Person Name" } })
+            @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MobileNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile Number" } })
+            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DrugLicenceNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.DrugLicenceNumber1, new { htmlAttributes = new { @class = "form-control", @style = "width:150px;float:left;", placeholder = "20b" } })
+            @Html.EditorFor(model => model.DrugLicenceNumber2, new { htmlAttributes = new { @class = "form-control", @style = "width:150px;float:left;", placeholder = "21b" } })
+            <br />@Html.ValidationMessageFor(model => model.DrugLicenceNumber, "", new { @class = "text-danger", id = "ValidationMessageForDrugLicenceNumber" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DrugLicenceExpiry, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.DrugLicenceExpiry, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DrugLicenceExpiry, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TinNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.TinNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Tin Number" } })
+            @Html.ValidationMessageFor(model => model.TinNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PanNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.PanNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Pan Number" } })
+            @Html.ValidationMessageFor(model => model.PanNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HasGstRegistrationNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.RadioButtonFor(model => model.HasGstRegistrationNumber, "true", new { htmlAttributes = new { @class = "form-control" } }) Yes
+            @Html.RadioButtonFor(model => model.HasGstRegistrationNumber, "false", new { htmlAttributes = new { @class = "form-control" } }) No
+            @Html.ValidationMessageFor(model => model.HasGstRegistrationNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" id="GstRegistration" style="display:none">
+        @Html.LabelFor(model => model.GstRegistrationNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.GstRegistrationNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "GST Registration Number" } })
+            @Html.ValidationMessageFor(model => model.GstRegistrationNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary block full-width m-b" id="Register">Register</button>
+
+    <p>
+        <a class="btn btn-sm btn-white btn-block" href="@Url.Action("Login", "Home")">Back To Login</a>
+    </p>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#DrugLicenceExpiry').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            dateFormat: 'yyyy/MM/dd' 
+        });
+
+        $("#Register").click(function () {
+            if ($("#DrugLicenceNumber1").val() == "" || $("#DrugLicenceNumber2").val() == "") {
+                $("#ValidationMessageForDrugLicenceNumber").text("Please Enter Drug Licence Number");
+            }
+        });
+
+        $('input[type="radio"]').click(function () {
+            var selectedRadio = $(this).val();
+            if (selectedRadio == 'true') {
+                $("#GstRegistration").show();
+            } else {
+                $("#GstRegistration").hide();
+            }
+        });
+    });
+</script>
