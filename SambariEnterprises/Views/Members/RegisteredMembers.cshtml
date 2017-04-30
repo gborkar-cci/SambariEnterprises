@@ -61,8 +61,8 @@
                                                 @Html.DisplayFor(modelItem => item.GstRegistrationNumber)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.MemberID })
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.MemberID })
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                                <a href="#" onclick="Confirmation(@item.ID);" >Delete</a>                                                
                                             </td>
                                         </tr>
                                     }
@@ -81,3 +81,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function Confirmation(id)
+    {
+        if(confirm("Are you sure you want to delete this record?"))
+        {
+            window.location.href = "/Members/Delete/" + id
+        }
+    }
+</script>

@@ -70,7 +70,7 @@ namespace SambariEnterprises.Controllers
         public ActionResult RegisteredMembers()
         {
             List<MemberViewModel> lstMemberViewModel = new List<MemberViewModel>();
-            var registeredMembers = db.MemberRegistrations.Where(m => m.Member.UserName != null).Include(m => m.Member);
+            var registeredMembers = db.MemberRegistrations.Where(m => m.Member.UserName != null && m.IsActive == true).Include(m => m.Member);
 
             if (registeredMembers != null && registeredMembers.Count() > 0)
             {
@@ -94,6 +94,57 @@ namespace SambariEnterprises.Controllers
             }
 
             return View(lstMemberViewModel);
+        }
+
+        [CustomAuthorize("SuperAdmin")]
+        public ActionResult Edit(long id)
+        {
+            var model = new RegistrationViewModel();
+            var registeredMember = db.MemberRegistrations.Where(m => m.ID == id).Include(m => m.Member).FirstOrDefault();
+
+            if (registeredMember != null)
+            {
+                model.MemberRegistrationID = registeredMember.ID;
+                model.PharmacyName = registeredMember.PharmacyName;
+                model.Email = registeredMember.Member.Email;
+                model.OwnerName = registeredMember.OwnerName;
+                model.ContactPersonName = registeredMember.ContactPersonName;
+                model.MobileNumber = registeredMember.Phone;
+                model.PanNumber = registeredMember.PanNumber;
+                model.TinNumber = registeredMember.TinNumber;
+                model.GstRegistrationNumber = registeredMember.GSTResgistrationNumber;
+                model.DrugLicenceExpiry = registeredMember.DrugLicenceExpiry.ToString();
+
+                var drugLicenseNumber = registeredMember.DrugLicenceNumber.Split('~');
+                model.DrugLicenceNumber1 = drugLicenseNumber[0];
+
+                if(drugLicenseNumber.Count() > 1)
+                    model.DrugLicenceNumber2 = string.IsNullOrWhiteSpace(drugLicenseNumber[1]) ? string.Empty : drugLicenseNumber[1];
+                model.Constitution = registeredMember.Constitution;
+                model.Address = registeredMember.Address;
+            }
+
+            return View("MemberEdit", model);
+        }
+
+        [CustomAuthorize("SuperAdmin")]
+        public ActionResult Delete(long id)
+        {
+            var registeredMember = db.MemberRegistrations.Where(m => m.ID == id).Include(m => m.Member).FirstOrDefault();
+
+            if (registeredMember != null)
+            {
+                registeredMember.IsActive = false;
+                registeredMember.Member.IsActive = false;
+
+                db.MemberRegistrations.Attach(registeredMember);
+                var entry = db.Entry(registeredMember);
+                entry.Property(e => e.IsActive).IsModified = true;
+                db.SaveChanges();
+            }
+
+            TempData["Success"] = "Succefully deleted";
+            return RedirectToAction("RegisteredMembers");
         }
 
         #region POST
@@ -137,6 +188,7 @@ namespace SambariEnterprises.Controllers
                     memberRegistration.GSTResgistrationNumber = string.IsNullOrWhiteSpace(registrationViewModel.GstRegistrationNumber)
                                                                     ? string.Empty
                                                                     : registrationViewModel.GstRegistrationNumber.Trim();
+                    memberRegistration.Phone = registrationViewModel.MobileNumber;
                     memberRegistration.IsActive = true;
                     memberRegistration.CreatedBy = 1;
                     memberRegistration.CreatedDate = DateTime.UtcNow;
@@ -154,6 +206,85 @@ namespace SambariEnterprises.Controllers
                 {
                     ModelState.AddModelError("Message", "Error occured while performing you request.");
                     return View(registrationViewModel);
+                }
+            }
+
+            return null;
+        }
+
+        [HttpPost]
+        [CustomAuthorize("SuperAdmin")]
+        public ActionResult Edit(RegistrationViewModel registrationViewModel)
+        {
+            var member = new Member();
+            var memberRegistration = new MemberRegistration();
+
+            if (registrationViewModel != null)
+            {
+                try
+                {
+                    memberRegistration = db.MemberRegistrations.Where(mr => mr.ID == registrationViewModel.MemberRegistrationID).FirstOrDefault();
+                    member = memberRegistration.Member;
+
+                    if (db.Members.Any(m => m.Email == registrationViewModel.Email && m.IsActive == true && m.ID != member.ID))
+                    {
+                        ModelState.AddModelError("Email", "Email address already exist in the system.");
+                        return View("MemberEdit", registrationViewModel);
+                    }             
+                     
+                    member.Email = registrationViewModel.Email;
+                    member.IsActive = true;
+                    member.UpdatedDate = DateTime.UtcNow;
+                    member.UpdatedBy = 1;
+
+                    memberRegistration.Member = member;
+                    memberRegistration.PharmacyName = string.IsNullOrWhiteSpace(registrationViewModel.PharmacyName) ? string.Empty : registrationViewModel.PharmacyName;
+                    memberRegistration.OwnerName = string.IsNullOrWhiteSpace(registrationViewModel.OwnerName) ? string.Empty : registrationViewModel.OwnerName;
+                    memberRegistration.ContactPersonName = string.IsNullOrWhiteSpace(registrationViewModel.ContactPersonName) ? string.Empty : registrationViewModel.ContactPersonName;
+                    memberRegistration.TinNumber = string.IsNullOrWhiteSpace(registrationViewModel.TinNumber) ? string.Empty : registrationViewModel.TinNumber;
+                    memberRegistration.Address = string.IsNullOrWhiteSpace(registrationViewModel.Address) ? string.Empty : registrationViewModel.Address;
+                    memberRegistration.DrugLicenceNumber = string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceNumber) ? string.Empty : registrationViewModel.DrugLicenceNumber;
+                    memberRegistration.DrugLicenceExpiry = Convert.ToDateTime(registrationViewModel.DrugLicenceExpiry);
+                    memberRegistration.PanNumber = registrationViewModel.PanNumber;
+                    memberRegistration.RegisteredForGst = registrationViewModel.HasGstRegistrationNumber;
+                    memberRegistration.Constitution = registrationViewModel.Constitution;
+                    memberRegistration.GSTResgistrationNumber = string.IsNullOrWhiteSpace(registrationViewModel.GstRegistrationNumber)
+                                                                    ? string.Empty
+                                                                    : registrationViewModel.GstRegistrationNumber.Trim();
+                    memberRegistration.Phone = registrationViewModel.MobileNumber;
+                    memberRegistration.IsActive = true;
+                    memberRegistration.UpdatedBy = 1;
+                    memberRegistration.UpdatedDate = DateTime.UtcNow;
+
+                    db.MemberRegistrations.Attach(memberRegistration);
+                    var entry = db.Entry(memberRegistration);
+                    entry.Property(e => e.PharmacyName).IsModified = true;
+                    entry.Property(e => e.OwnerName).IsModified = true;
+                    entry.Property(e => e.ContactPersonName).IsModified = true;
+                    entry.Property(e => e.TinNumber).IsModified = true;
+                    entry.Property(e => e.Address).IsModified = true;
+                    entry.Property(e => e.DrugLicenceExpiry).IsModified = true;
+                    entry.Property(e => e.DrugLicenceNumber).IsModified = true;
+                    entry.Property(e => e.PanNumber).IsModified = true;
+                    entry.Property(e => e.RegisteredForGst).IsModified = true;
+                    entry.Property(e => e.Constitution).IsModified = true;
+                    entry.Property(e => e.GSTResgistrationNumber).IsModified = true;
+                    entry.Property(e => e.Phone).IsModified = true;
+                    entry.Property(e => e.IsActive).IsModified = true;
+                    entry.Property(e => e.UpdatedBy).IsModified = true;
+                    entry.Property(e => e.UpdatedDate).IsModified = true;
+                    db.SaveChanges();
+
+                    //EmailHelper.SendUserMail(memberRegistration.PharmacyName, member.Email);
+                    //EmailHelper.SendAdminMail(registrationViewModel);
+
+                    TempData["Success"] = "Succefully updated";
+                    return Redirect("/Members/RegisteredMembers");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Message", "Error occured while performing you request.");
+                    return View("MemberEdit", registrationViewModel);
                 }
             }
 
