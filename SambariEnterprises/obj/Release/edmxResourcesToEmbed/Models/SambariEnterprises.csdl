@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SambariEnterprisesModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="SambariEnterprisesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="MemberRegistration">
     <Key>
       <PropertyRef Name="ID" />
@@ -8,24 +8,38 @@
     <Property Name="ResourceID" Type="Guid" Nullable="false" />
     <Property Name="MemberID" Type="Int64" Nullable="false" />
     <Property Name="MasterID" Type="Int64" />
-    <Property Name="PharmacyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="DrugLicenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PinCode" Type="Int32" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Constitution" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizedPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceNumber1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry1" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DrugLicenceNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry2" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DrugLicenceNumber3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry3" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DrugLicenceNumber4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry4" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ContactPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPersonMobile" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPersonEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry" Type="DateTime" Precision="0" />
     <Property Name="TinNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ApplicationReferenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PanNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RegisteredForGst" Type="Boolean" />
     <Property Name="GSTResgistrationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GSTAcknowledgement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="CreatedBy" Type="Int64" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Member" Relationship="Self.FK_MemberRegistration_Members" FromRole="MemberRegistration" ToRole="Members" />
-    <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ContactPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="DrugLicenceExpiry" Type="DateTime" Precision="0" />
-    <Property Name="Constitution" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PanNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RegisteredForGst" Type="Boolean" />
   </EntityType>
   <EntityType Name="Member">
     <Key>
@@ -33,6 +47,7 @@
     </Key>
     <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ResourceID" Type="Guid" Nullable="false" />
+    <Property Name="RoleID" Type="Int64" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="HashCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -44,8 +59,20 @@
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="MemberRegistrations" Relationship="Self.FK_MemberRegistration_Members" FromRole="Members" ToRole="MemberRegistration" />
-    <Property Name="RoleID" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="Role" Relationship="SambariEnterprisesModel1.FK_Members_Role" FromRole="Member" ToRole="Role" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Members_Role" FromRole="Members" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Guid" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Members_Role" FromRole="Role" ToRole="Members" />
+    <NavigationProperty Name="SystemUsers" Relationship="Self.FK_SystemUser_Role" FromRole="Role" ToRole="SystemUser" />
   </EntityType>
   <EntityType Name="SystemUser">
     <Key>
@@ -53,6 +80,7 @@
     </Key>
     <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ResourceID" Type="Guid" Nullable="false" />
+    <Property Name="RoleID" Type="Int64" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="HashCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -62,8 +90,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-    <Property Name="RoleID" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="Role" Relationship="SambariEnterprisesModel1.FK_SystemUser_Role" FromRole="SystemUser" ToRole="Role" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_SystemUser_Role" FromRole="SystemUser" ToRole="Role" />
   </EntityType>
   <Association Name="FK_MemberRegistration_Members">
     <End Role="Members" Type="Self.Member" Multiplicity="1" />
@@ -77,52 +104,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="SambariEnterprisesEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="MemberRegistrations" EntityType="Self.MemberRegistration" />
-    <EntitySet Name="Members" EntityType="Self.Member" />
-    <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
-    <AssociationSet Name="FK_MemberRegistration_Members" Association="Self.FK_MemberRegistration_Members">
-      <End Role="Members" EntitySet="Members" />
-      <End Role="MemberRegistration" EntitySet="MemberRegistrations" />
-    </AssociationSet>
-    <EntitySet Name="Roles" EntityType="SambariEnterprisesModel1.Role" />
-    <AssociationSet Name="FK_Members_Role" Association="SambariEnterprisesModel1.FK_Members_Role">
-      <End Role="Role" EntitySet="Roles" />
-      <End Role="Member" EntitySet="Members" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SystemUser_Role" Association="SambariEnterprisesModel1.FK_SystemUser_Role">
-      <End Role="Role" EntitySet="Roles" />
-      <End Role="SystemUser" EntitySet="SystemUsers" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Role">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ResourceID" Type="Guid" Nullable="false" />
-    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Members" Relationship="SambariEnterprisesModel1.FK_Members_Role" FromRole="Role" ToRole="Member" />
-    <NavigationProperty Name="SystemUsers" Relationship="SambariEnterprisesModel1.FK_SystemUser_Role" FromRole="Role" ToRole="SystemUser" />
-  </EntityType>
   <Association Name="FK_Members_Role">
-    <End Type="SambariEnterprisesModel1.Role" Role="Role" Multiplicity="1" />
-    <End Type="SambariEnterprisesModel1.Member" Role="Member" Multiplicity="*" />
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Role">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Member">
+      <Dependent Role="Members">
         <PropertyRef Name="RoleID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SystemUser_Role">
-    <End Type="SambariEnterprisesModel1.Role" Role="Role" Multiplicity="1" />
-    <End Type="SambariEnterprisesModel1.SystemUser" Role="SystemUser" Multiplicity="*" />
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Role">
         <PropertyRef Name="ID" />
@@ -132,4 +128,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="SambariEnterprisesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MemberRegistrations" EntityType="Self.MemberRegistration" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
+    <AssociationSet Name="FK_MemberRegistration_Members" Association="Self.FK_MemberRegistration_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Role" Association="Self.FK_Members_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SystemUser_Role" Association="Self.FK_SystemUser_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="SystemUser" EntitySet="SystemUsers" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

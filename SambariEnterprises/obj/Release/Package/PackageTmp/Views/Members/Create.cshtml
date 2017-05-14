@@ -1,32 +1,59 @@
 ﻿@model SambariEnterprises.ViewModels.RegistrationViewModel
-
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "Register Member";
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
 }
 
-
-@using (Html.BeginForm("Create", "Members", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Create", "Members", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "register" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <!-- customer name -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerName, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
+    <!-- address -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- pincode -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.PinCode, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.PinCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PinCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- phone number -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerPhone, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.CustomerPhone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CustomerPhone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- email -->
     <div class="form-group">
         @Html.LabelFor(model => model.Email, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PharmacyName, new { @class = "col-sm-4 control-label" })
-        <div class="col-sm-8">
-            @Html.EditorFor(model => model.PharmacyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Pharmacy Name" } })
-            @Html.ValidationMessageFor(model => model.PharmacyName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
+    <!-- Constitution (Proprietorship/Partnership/Company) -->
     <div class="form-group">
         @Html.LabelFor(model => model.Constitution, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
@@ -37,71 +64,110 @@
         </div>
     </div>
 
+    <!-- Name of the Owner/Partner/Director -->
     <div class="form-group">
         @Html.LabelFor(model => model.OwnerName, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control", placeholder = "Owner Name" } })
+            @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <!-- Authorized person -->
     <div class="form-group">
-        @Html.LabelFor(model => model.ContactPersonName, new { @class = "col-sm-4 control-label" })
+        @Html.LabelFor(model => model.AuthorizedPersonName, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control", placeholder = "Contact Person Name" } })
-            @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.AuthorizedPersonName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AuthorizedPersonName, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address, new { @class = "col-sm-4 control-label" })
-        <div class="col-sm-8">
-            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
-            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
+    <!-- Mobile Number(to receive business related updates) -->
     <div class="form-group">
         @Html.LabelFor(model => model.MobileNumber, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile Number" } })
+            @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <!-- DL Nos. -->
     <div class="form-group">
-        @Html.LabelFor(model => model.DrugLicenceNumber, new { @class = "col-sm-4 control-label" })
+        @Html.LabelFor(model => model.DrugLicenceNumber1, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.DrugLicenceNumber1, new { htmlAttributes = new { @class = "form-control", @style = "width:150px;float:left;", placeholder = "20b" } })
-            @Html.EditorFor(model => model.DrugLicenceNumber2, new { htmlAttributes = new { @class = "form-control", @style = "width:150px;float:left;", placeholder = "21b" } })
-            <br />@Html.ValidationMessageFor(model => model.DrugLicenceNumber, "", new { @class = "text-danger", id = "ValidationMessageForDrugLicenceNumber" })
+            <!-- 20B -->
+            <div class="row">
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceNumber1, new { htmlAttributes = new { @class = "form-control", placeholder = "20B" } })
+                </div>
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceExpiry1, new { htmlAttributes = new { @class = "form-control", placeholder = "Expiry" } })
+                </div>
+            </div>
+
+            <!-- 21B -->
+            <div class="row">
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceNumber2, new { htmlAttributes = new { @class = "form-control", placeholder = "21B" } })
+                </div>
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceExpiry2, new { htmlAttributes = new { @class = "form-control", placeholder = "Expiry" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceNumber3, new { htmlAttributes = new { @class = "form-control", placeholder = "Others" } })
+                </div>
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceExpiry3, new { htmlAttributes = new { @class = "form-control", placeholder = "Expiry" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceNumber4, new { htmlAttributes = new { @class = "form-control", placeholder = "Others" } })
+                </div>
+                <div class="col-sm-6 m-b-15">
+                    @Html.EditorFor(model => model.DrugLicenceExpiry4, new { htmlAttributes = new { @class = "form-control", placeholder = "Expiry" } })
+                </div>
+            </div>@Html.ValidationMessageFor(model => model.DrugLicenceNumber1, "", new { @class = "text-danger", id = "ValidationMessageForDrugLicenceNumber" })
         </div>
     </div>
 
+    <!-- GST -->
     <div class="form-group">
-        @Html.LabelFor(model => model.DrugLicenceExpiry, new { @class = "col-sm-4 control-label" })
+        <h4>GST Details</h4>
+    </div>
+
+    <!-- Contact Person for all GST related enquiries -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactPersonName, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.DrugLicenceExpiry, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DrugLicenceExpiry, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <!-- Mobile No. of Contact Person -->
     <div class="form-group">
-        @Html.LabelFor(model => model.TinNumber, new { @class = "col-sm-4 control-label" })
+        @Html.LabelFor(model => model.ContactPersonMobileNumber, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.TinNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Tin Number" } })
-            @Html.ValidationMessageFor(model => model.TinNumber, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.ContactPersonMobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ContactPersonMobileNumber, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <!-- Email Address of Contact Person -->
     <div class="form-group">
-        @Html.LabelFor(model => model.PanNumber, new { @class = "col-sm-4 control-label" })
+        @Html.LabelFor(model => model.ContactPersonEmail, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.PanNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Pan Number" } })
-            @Html.ValidationMessageFor(model => model.PanNumber, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.ContactPersonEmail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ContactPersonEmail, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <!-- Are you registered for GST? -->
     <div class="form-group">
         @Html.LabelFor(model => model.HasGstRegistrationNumber, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
@@ -111,50 +177,133 @@
         </div>
     </div>
 
+    <!-- Application Reference Number(ARN) -->
     <div class="form-group" id="GstRegistration" style="display:none">
         @Html.LabelFor(model => model.GstRegistrationNumber, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">
-            @Html.EditorFor(model => model.GstRegistrationNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "GST Registration Number" } })
+            @Html.EditorFor(model => model.GstRegistrationNumber, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.GstRegistrationNumber, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary block full-width m-b" id="Register">Register</button>
+    <div class="form-group" id="ApplicationReferenceNumber" style="display:none">
+        @Html.LabelFor(model => model.ApplicationReferenceNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.ApplicationReferenceNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ApplicationReferenceNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-    <p>
-        <a class="btn btn-sm btn-white btn-block" href="@Url.Action("Login", "Home")">Back To Login</a>
-    </p>
-}
+    <!-- Provisional ID Number (GSTIN) -->
+    <div class="form-group" id="TinNumber" style="display:none">
+        @Html.LabelFor(model => model.TinNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.TinNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TinNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <!-- PAN Number -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.PanNumber, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(model => model.PanNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PanNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-<script src="~/Scripts/bootstrap-datepicker.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#DrugLicenceExpiry').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true,
-            dateFormat: 'yyyy/MM/dd' 
-        });
+    <!-- File upload -->
+    <div class="form-group" id="acknowledgement" style="display:none">
+        @Html.LabelFor(model => model.GSTAcknowledgement, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.TextBoxFor(model => model.GSTAcknowledgement, new { type = "file" })
+            @Html.ValidationMessageFor(model => model.GSTAcknowledgement, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-        $("#Register").click(function () {
-            if ($("#DrugLicenceNumber1").val() == "" || $("#DrugLicenceNumber2").val() == "") {
-                $("#ValidationMessageForDrugLicenceNumber").text("Please Enter Drug Licence Number");
-            }
-        });
+    <!-- acceptance -->
+    <div class="form-group" id="acceptance">
+        <div class="col-sm-12">
+            @Html.CheckBoxFor(model => model.TermsAndCondition, new { @class = "accept" })
+            <p class="custom">
+                I accept that I am unregistered for GST. My orders are to be billed as 'sale invoices' and to be declared on the GST portal as sale invoices of unregistered dealers. I will be responsible to provide my GST number to
+                Sambari Enterprises if I register for GST in the future. I will not receive Input Tax Credit from Sambari Entperprises on invoices prior to submission of my GST number.
+            </p>
+            <label class="text-danger" id="ValidationMessageForGSTTermsCondition"></label>
+        </div>
+    </div>
 
-        $('input[type="radio"]').click(function () {
-            var selectedRadio = $(this).val();
-            if (selectedRadio == 'true') {
-                $("#GstRegistration").show();
-            } else {
-                $("#GstRegistration").hide();
-            }
-        });
-    });
-</script>
+        <!-- submit button -->
+        <div class="col-sm-8 col-sm-offset-4">
+            <button type="submit" class="btn btn-primary block m-b" id="Register">Submit</button>
+            <p class="text-right">
+                <a href="@Url.Action("Login", "Home")">Back To Login</a>
+            </p>
+        </div>
+        }
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        <script src="~/Scripts/bootstrap-datepicker.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#DrugLicenceExpiry1').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true,
+                    dateFormat: 'yyyy/MM/dd'
+                });
+
+                $('#DrugLicenceExpiry2').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true,
+                    dateFormat: 'yyyy/MM/dd'
+                });
+
+                $('#DrugLicenceExpiry3').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true,
+                    dateFormat: 'yyyy/MM/dd'
+                });
+
+                $('#DrugLicenceExpiry4').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true,
+                    dateFormat: 'yyyy/MM/dd'
+                });
+
+                $('#register').submit(function (event) {
+                    if ($(this).valid()) {
+                        if ($('#TermsAndCondition').is(':checked') == false) {
+                            event.preventDefault();
+                            alert("You must accept our terms and conditions!");
+                            return false;
+                        }
+                    }
+                    
+                });
+
+                $('input[type="radio"]').click(function () {
+                    var selectedRadio = $(this).val();
+                    if (selectedRadio == 'true') {
+                        $("#GstRegistration, #TinNumber, #ApplicationReferenceNumber, #acknowledgement, #acceptance").show();
+                        $("#acceptance").hide();
+                    } else {
+                        $("#GstRegistration, #TinNumber, #ApplicationReferenceNumber, #acknowledgement, #acceptance").hide();
+                        $("#acceptance").show();
+                    }
+                });
+            });
+        </script>

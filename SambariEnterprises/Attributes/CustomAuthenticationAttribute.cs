@@ -10,7 +10,7 @@ namespace SambariEnterprises.Attributes
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        private SambariEnterprisesEntities1 context = new SambariEnterprisesEntities1();
+        private SambariEnterprisesEntities context = new SambariEnterprisesEntities();
         private readonly string[] allowedroles;
 
         public CustomAuthorizeAttribute(params string[] roles)
@@ -28,6 +28,15 @@ namespace SambariEnterprises.Attributes
                 if (user.Count() > 0)
                 {
                     authorize = true; /* return true if Entity has current user(active) with specific role */
+                }
+                else
+                {
+                    var member = context.Members.Where(m => m.ID == userID && m.Role.RoleName == role && m.IsActive == true);
+
+                    if (member.Count() > 0)
+                    {
+                        authorize = true; /* return true if Entity has current user(active) with specific role */
+                    }
                 }
             }
             return authorize;

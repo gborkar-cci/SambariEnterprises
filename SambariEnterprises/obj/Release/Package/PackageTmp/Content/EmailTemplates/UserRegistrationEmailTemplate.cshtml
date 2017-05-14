@@ -11,18 +11,33 @@
 </head>
 <body>
     <div>
-        You have a new Registration at Sambari Enterprises.
-        Email : @Model.Email <br />
-        Pharmacy Name : @Model.PharmacyName <br />
-        Owner Name : @Model.OwnerName <br />
-        Contact Person Name : @Model.ContactPersonName <br />
+        Thank you for registering with Sambari Enterprises. You will receive your login ID and password shortly on the registered email ID of your company. 
+        We shall inform you once the site goes live. Thank you for being our valued customer <br /><br />
+        Registration details at Sambari Enterprises. <br /><br />
+        Customer Name : @Model.CustomerName <br />
         Address : @Model.Address <br />
-        Mobile Number : @Model.MobileNumber <br />
-        Drug Licence Number : @Model.DrugLicenceNumber <br />
-        Tin Number : @Model.TinNumber <br />
-        Gst Registration Number : @Model.GstRegistrationNumber <br />
+        Pin Code : @Model.PinCode <br />
+        Phone Number : @Model.CustomerPhone <br />
+        Constitution : @Model.Constitution <br />
+        Name of Owner/Partner/Director : @Model.OwnerName <br />
+        Authorised Person (If Different from above) : @Model.AuthorizedPersonName <br />
+        Mobile Number(to receive business related updates) : @Model.MobileNumber <br />
+        Drug Licence Number : @Model.DrugLicenceNumber1 &nbsp; Expiry: @Model.DrugLicenceExpiry1 <br />
+        @Model.DrugLicenceNumber2 &nbsp; Expiry: @Model.DrugLicenceExpiry2<br />
+        @Model.DrugLicenceNumber3 &nbsp; Expiry: @Model.DrugLicenceExpiry3<br />
+        @Model.DrugLicenceNumber4 &nbsp; Expiry: @Model.DrugLicenceExpiry4<br />
+        Contact Person for all GST related enquiries : @Model.ContactPersonName <br />
+        Mobile No. of Contact Person : @Model.ContactPersonMobileNumber <br />
+        Email Address of Contact Person : @Model.ContactPersonEmail <br />
 
-        To generate username and password <a href="#">Click here</a>
+        Are you registered for GST? : @Model.HasGstRegistrationNumber <br />
+        Provisional ID Number (GSTIN) : @Model.GstRegistrationNumber <br />
+        Application Reference Number (ARN) : @Model.ApplicationReferenceNumber <br />
+        Tin Number : @Model.TinNumber <br />
+        Pan Number : @Model.PanNumber <br />
+        GST Acknowledgement :  <br /><br />
+
+        Kind Regards – Sambari Enterprises
 
     </div>
 </body>

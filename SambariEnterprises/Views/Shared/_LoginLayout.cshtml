@@ -12,30 +12,75 @@
     @Scripts.Render("~/bundles/jquery")
 
 </head>
-<body class="gray-bg">
-    <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
-            <div>
-                <img src="~/Content/images/se-logo.jpg" alt="Sambari Enterprises" width="600" height="300">
-            </div>
-            <br />
+<body class="white-bg login-bg">
+    <div class="container-fluid">
 
-            @if (TempData["Success"] != null)
+
+
+                    <div class="middle-box text-center loginscreen animated fadeInDown col-sm-offset-2 col-sm-8">
+                        <div class="col-sm-6 left-side">
+                            <div class="logo">
+                                <img src="~/Content/images/se-logo.jpg" class="img-responsive" alt="Sambari Enterprises">
+                                <h5>DISTRIBUTORS &amp; WHOLESALERS FOR PHARMACEUTICAL &amp; ALLIED PRODUCTS</h5>
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <div class="address first">
+                                    <h3 class="green">HEAD OFFICE</h3>
+                                    'GAJANAN', Opp. Little’s Primary School, Murida Road, Fatorda Goa.<br />
+                                    Tel: 0832-2749928 (4 Lines)<br/>
+                                    Email: <a href="mailto:sambarienterprisesgoa@gmail.com">sambarienterprisesgoa@gmail.com</a>
+                                </div>
+                                <div class="address">
+                                    <h3 class="green">BRANCHES</h3>
+                                    <h4>MARGAO</h4>
+                                    12B/20, Ashirwad Building, Isidorio Baptista Road, Margao Goa.<br />
+                                    Tel: 0832-2711769/6571769
+                                </div>
+                                <div class="address">
+                                    <h4>MAPUSA</h4>
+                                    Shop No. 2/3/4, Bhavani Appts, Subrai Joshi Road, Mapusa Goa.<br />
+                                    Tel: 0832-2250196/2250086
+                                </div>
+                                <div class="address last">
+                                    <h4>PANAJI</h4>
+                                    'Safalya', H.No 101, Gr. Floor, Dr. Dada Vaidya Road, Panaji Goa.<br />
+                                    Tel: 0832-2431113/2225335
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-6 right-side">
+                            @if (TempData["Success"] != null)
             {
-                <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+                                <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
             }
-
-            @if (TempData["Error"] != null)
+                            @if (TempData["Error"] != null)
             {
-                <p class="alert alert-danger" id="errorMessage">@TempData["Error"]</p>
+                                <p class="alert alert-danger" id="errorMessage">@TempData["Error"]</p>
             }
+                            @RenderBody()
 
-            @RenderBody()
-            <p class="m-t"> <small>Sambari Enterprises &copy; @DateTime.UtcNow.Year</small> </p>
-        </div>
+                        </div>
+                    </div>
+
+               
+
+
+
+
+
     </div>
-
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+                @Scripts.Render("~/bundles/bootstrap")
+                @RenderSection("scripts", required: false)
+                <script>
+                    $(document).ready(function () {
+                        // make divs equal height
+                        var height = Math.max($(".loginscreen .left-side").height(), $(".loginscreen .left-side").height());
+                        $(".loginscreen .left-side").height(height);
+                        $(".loginscreen .right-side").height(height);
+                    });
+                </script>
 </body>
 </html>

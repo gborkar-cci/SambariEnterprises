@@ -16,6 +16,7 @@ namespace SambariEnterprises.Models
     {
         public long ID { get; set; }
         public System.Guid ResourceID { get; set; }
+        public long RoleID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string HashCode { get; set; }
@@ -25,7 +26,6 @@ namespace SambariEnterprises.Models
         public System.DateTime CreatedDate { get; set; }
         public Nullable<long> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public long RoleID { get; set; }
     
         public virtual Role Role { get; set; }
     }

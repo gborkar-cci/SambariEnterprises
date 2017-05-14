@@ -6,14 +6,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Personal\C#\SambariEnterprises45\publish</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Personal\C#\Github\deployment</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
       <publishTime>04/20/2017 00:48:30</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>04/20/2017 00:47:53</publishTime>
+      <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>04/20/2017 00:48:30</publishTime>
@@ -28,25 +28,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/24/2016 21:27:06</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>04/20/2017 00:47:54</publishTime>
+      <publishTime>12/09/2016 21:37:14</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
-      <publishTime>04/20/2017 00:47:54</publishTime>
+      <publishTime>04/07/2017 15:53:48</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
-      <publishTime>04/20/2017 00:47:54</publishTime>
+      <publishTime>04/07/2017 15:58:44</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
-      <publishTime>04/20/2017 00:47:57</publishTime>
+      <publishTime>04/05/2017 12:23:06</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Web.dll">
-      <publishTime>04/20/2017 00:47:57</publishTime>
+      <publishTime>04/07/2017 15:57:16</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.WindowsServer.dll">
-      <publishTime>04/20/2017 00:47:57</publishTime>
+      <publishTime>04/07/2017 15:58:44</publishTime>
     </File>
     <File Include="bin/Microsoft.ApplicationInsights.dll">
-      <publishTime>04/20/2017 00:47:54</publishTime>
+      <publishTime>04/05/2017 12:23:12</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>04/03/2015 17:07:22</publishTime>
@@ -64,55 +64,55 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2017 01:08:24</publishTime>
     </File>
     <File Include="bin/Microsoft.Diagnostics.Tracing.EventSource.dll">
-      <publishTime>04/20/2017 00:47:54</publishTime>
+      <publishTime>12/01/2015 14:31:46</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:36</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:40</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:42</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:42</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:44</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Google.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:44</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:46</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:46</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/05/2017 11:53:48</publishTime>
     </File>
     <File Include="bin/Microsoft.Threading.Tasks.dll">
-      <publishTime>04/20/2017 00:47:56</publishTime>
+      <publishTime>04/07/2014 12:26:14</publishTime>
     </File>
     <File Include="bin/Microsoft.Threading.Tasks.Extensions.Desktop.dll">
-      <publishTime>04/20/2017 00:47:56</publishTime>
+      <publishTime>04/07/2014 12:26:14</publishTime>
     </File>
     <File Include="bin/Microsoft.Threading.Tasks.Extensions.dll">
-      <publishTime>04/20/2017 00:47:56</publishTime>
+      <publishTime>04/07/2014 12:26:14</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>04/23/2012 15:23:58</publishTime>
+      <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>04/20/2017 01:08:24</publishTime>
+      <publishTime>04/02/2017 17:46:32</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>11/27/2012 13:00:52</publishTime>
+      <publishTime>11/13/2012 12:19:34</publishTime>
     </File>
     <File Include="bin/RazorEngine.dll">
-      <publishTime>04/20/2017 01:11:02</publishTime>
+      <publishTime>11/13/2016 19:53:16</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>04/20/2017 01:08:24</publishTime>
@@ -259,7 +259,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2017 01:08:24</publishTime>
     </File>
     <File Include="bin/SambariEnterprises.dll">
-      <publishTime>04/26/2017 07:20:16</publishTime>
+      <publishTime>05/10/2017 04:54:10</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>01/28/2015 04:04:30</publishTime>
@@ -283,76 +283,79 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>04/20/2017 01:08:25</publishTime>
+      <publishTime>01/23/2014 13:57:34</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.css">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.css.map">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.min.css">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.min.css.map">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.css">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.css.map">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.min.css">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap-reboot.min.css.map">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
-      <publishTime>04/20/2017 01:30:32</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/css/animate.css">
-      <publishTime>11/13/2014 23:39:28</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/css/bootstrap.css">
-      <publishTime>11/25/2015 06:04:20</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/css/bootstrap.min.css">
-      <publishTime>11/25/2015 06:04:20</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/css/plugins/datapicker/datepicker.css">
-      <publishTime>12/20/2015 02:47:08</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/css/plugins/dataTables/datatables.min.css">
-      <publishTime>11/12/2015 04:58:52</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/css/style.css">
-      <publishTime>04/18/2017 23:22:51</publishTime>
+      <publishTime>05/10/2017 03:42:06</publishTime>
+    </File>
+    <File Include="Content/EmailTemplates/UserChangePasswordDetails.cshtml">
+      <publishTime>05/02/2017 07:25:54</publishTime>
     </File>
     <File Include="Content/EmailTemplates/UserDetailsEmailTemplate.cshtml">
-      <publishTime>04/12/2017 02:30:21</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/EmailTemplates/UserEmailTemplate.cshtml">
-      <publishTime>04/12/2017 02:18:51</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/EmailTemplates/UserRegistrationEmailTemplate.cshtml">
-      <publishTime>04/16/2017 15:58:06</publishTime>
+      <publishTime>05/10/2017 04:52:49</publishTime>
     </File>
     <File Include="Content/images/se-logo.jpg">
-      <publishTime>04/13/2017 01:31:44</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>04/06/2017 01:21:54</publishTime>
+      <publishTime>04/30/2017 11:03:04</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>04/06/2017 01:21:54</publishTime>
@@ -475,7 +478,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/06/2017 01:21:54</publishTime>
     </File>
     <File Include="Models/SambariEnterprises.edmx.diagram">
-      <publishTime>04/12/2017 01:06:02</publishTime>
+      <publishTime>05/10/2017 02:36:16</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>04/22/2017 23:06:12</publishTime>
@@ -550,40 +553,52 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2017 01:30:33</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>04/18/2017 23:27:38</publishTime>
+      <publishTime>05/09/2017 00:29:30</publishTime>
     </File>
     <File Include="Views/Members/Create.cshtml">
-      <publishTime>04/19/2017 01:14:56</publishTime>
+      <publishTime>05/10/2017 04:17:04</publishTime>
     </File>
     <File Include="Views/Members/Index.cshtml">
-      <publishTime>04/13/2017 02:35:49</publishTime>
+      <publishTime>05/10/2017 00:41:18</publishTime>
     </File>
     <File Include="Views/Members/LoginDetails.cshtml">
-      <publishTime>04/13/2017 22:29:31</publishTime>
+      <publishTime>04/29/2017 16:39:56</publishTime>
+    </File>
+    <File Include="Views/Members/MemberEdit.cshtml">
+      <publishTime>05/10/2017 01:46:52</publishTime>
+    </File>
+    <File Include="Views/Members/RegisteredMembers.cshtml">
+      <publishTime>04/30/2017 23:20:50</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>04/06/2017 01:22:26</publishTime>
+      <publishTime>04/06/2017 01:22:28</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
-      <publishTime>04/06/2017 01:22:27</publishTime>
+      <publishTime>04/06/2017 01:22:28</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/22/2017 23:35:54</publishTime>
+      <publishTime>05/09/2017 00:29:28</publishTime>
     </File>
     <File Include="Views/Shared/_LoginLayout.cshtml">
-      <publishTime>04/22/2017 23:35:08</publishTime>
+      <publishTime>05/10/2017 03:29:18</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>04/12/2017 01:30:57</publishTime>
+      <publishTime>04/12/2017 01:30:58</publishTime>
+    </File>
+    <File Include="Views/Shared/_RegisterLayout.cshtml">
+      <publishTime>05/09/2017 03:10:50</publishTime>
+    </File>
+    <File Include="Views/User/Dashboard.cshtml">
+      <publishTime>05/02/2017 07:34:32</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>04/06/2017 01:21:54</publishTime>
+      <publishTime>04/06/2017 01:21:56</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>04/06/2017 01:21:54</publishTime>
+      <publishTime>04/06/2017 01:21:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/26/2017 07:20:19</publishTime>
+      <publishTime>05/10/2017 04:54:13</publishTime>
     </File>
   </ItemGroup>
 </Project>

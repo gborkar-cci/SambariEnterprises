@@ -1,25 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SambariEnterprisesModel1StoreContainer" CdmEntityContainer="SambariEnterprisesEntities1">
+  <EntityContainerMapping StorageEntityContainer="SambariEnterprisesModelStoreContainer" CdmEntityContainer="SambariEnterprisesEntities">
     <EntitySetMapping Name="MemberRegistrations">
-      <EntityTypeMapping TypeName="SambariEnterprisesModel1.MemberRegistration">
+      <EntityTypeMapping TypeName="SambariEnterprisesModel.MemberRegistration">
         <MappingFragment StoreEntitySet="MemberRegistration">
-          <ScalarProperty Name="RegisteredForGst" ColumnName="RegisteredForGst" />
-          <ScalarProperty Name="PanNumber" ColumnName="PanNumber" />
-          <ScalarProperty Name="Constitution" ColumnName="Constitution" />
-          <ScalarProperty Name="DrugLicenceExpiry" ColumnName="DrugLicenceExpiry" />
-          <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
-          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
           <ScalarProperty Name="MemberID" ColumnName="MemberID" />
           <ScalarProperty Name="MasterID" ColumnName="MasterID" />
-          <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
           <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="DrugLicenceNumber" ColumnName="DrugLicenceNumber" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+          <ScalarProperty Name="Constitution" ColumnName="Constitution" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="AuthorizedPersonName" ColumnName="AuthorizedPersonName" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="DrugLicenceNumber1" ColumnName="DrugLicenceNumber1" />
+          <ScalarProperty Name="DrugLicenceExpiry1" ColumnName="DrugLicenceExpiry1" />
+          <ScalarProperty Name="DrugLicenceNumber2" ColumnName="DrugLicenceNumber2" />
+          <ScalarProperty Name="DrugLicenceExpiry2" ColumnName="DrugLicenceExpiry2" />
+          <ScalarProperty Name="DrugLicenceNumber3" ColumnName="DrugLicenceNumber3" />
+          <ScalarProperty Name="DrugLicenceExpiry3" ColumnName="DrugLicenceExpiry3" />
+          <ScalarProperty Name="DrugLicenceNumber4" ColumnName="DrugLicenceNumber4" />
+          <ScalarProperty Name="DrugLicenceExpiry4" ColumnName="DrugLicenceExpiry4" />
+          <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+          <ScalarProperty Name="ContactPersonMobile" ColumnName="ContactPersonMobile" />
+          <ScalarProperty Name="ContactPersonEmail" ColumnName="ContactPersonEmail" />
+          <ScalarProperty Name="DrugLicenceExpiry" ColumnName="DrugLicenceExpiry" />
           <ScalarProperty Name="TinNumber" ColumnName="TinNumber" />
+          <ScalarProperty Name="ApplicationReferenceNumber" ColumnName="ApplicationReferenceNumber" />
+          <ScalarProperty Name="PanNumber" ColumnName="PanNumber" />
+          <ScalarProperty Name="RegisteredForGst" ColumnName="RegisteredForGst" />
           <ScalarProperty Name="GSTResgistrationNumber" ColumnName="GSTResgistrationNumber" />
+          <ScalarProperty Name="GSTAcknowledgement" ColumnName="GSTAcknowledgement" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -29,11 +43,12 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Members">
-      <EntityTypeMapping TypeName="SambariEnterprisesModel1.Member">
+      <EntityTypeMapping TypeName="SambariEnterprisesModel.Member">
         <MappingFragment StoreEntitySet="Members">
-          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="IsTempPassword" ColumnName="IsTempPassword" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="HashCode" ColumnName="HashCode" />
@@ -47,12 +62,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SystemUsers">
-      <EntityTypeMapping TypeName="SambariEnterprisesModel1.SystemUser">
-        <MappingFragment StoreEntitySet="SystemUser">
-          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="SambariEnterprisesModel.Role">
+        <MappingFragment StoreEntitySet="Role">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemUsers">
+      <EntityTypeMapping TypeName="SambariEnterprisesModel.SystemUser">
+        <MappingFragment StoreEntitySet="SystemUser">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="HashCode" ColumnName="HashCode" />
@@ -62,18 +89,6 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Roles">
-      <EntityTypeMapping TypeName="SambariEnterprisesModel1.Role">
-        <MappingFragment StoreEntitySet="Role">
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

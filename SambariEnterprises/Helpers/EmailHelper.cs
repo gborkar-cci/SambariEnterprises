@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
@@ -15,7 +16,7 @@ namespace SambariEnterprises.Helpers
 {
     public class EmailHelper
     {
-        public static bool SendUserMail(string toName, string toEmail)
+        public static bool SendUserMail(RegistrationViewModel model)
         {
             string emailBody = string.Empty;
             // This to supress warnings from razor engine template
@@ -27,27 +28,41 @@ namespace SambariEnterprises.Helpers
 
             Engine.Razor = razorService;
 
-            var model = new UserWelcomeEmailViewModel { ToName = toName };
-
-            string templatePath = HttpContext.Current.Server.MapPath("~/Content/EmailTemplates/UserEmailTemplate.cshtml");
+            string templatePath = HttpContext.Current.Server.MapPath("~/Content/EmailTemplates/UserRegistrationEmailTemplate.cshtml");
 
             using (var reader = new StreamReader(templatePath))
             {
                 var template = reader.ReadToEnd();
-                Engine.Razor.AddTemplate("UserWelcomeEmailTemplate", template);
-                var emailBodyHtml = Engine.Razor.RunCompile("UserWelcomeEmailTemplate", typeof(UserWelcomeEmailViewModel), model);
+                Engine.Razor.AddTemplate("AdminEmailTemplate", template);
+                var emailBodyHtml = Engine.Razor.RunCompile("AdminEmailTemplate", typeof(RegistrationViewModel), model);
                 emailBody = emailBodyHtml;
             }
 
-            MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], toEmail);
-            SmtpClient client = new SmtpClient();
-            client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = ConfigurationManager.AppSettings["SmtpHost"];
-            mail.Subject = "Welcome to Sambari Enterprises";
-            mail.Body = emailBody;
-            client.Send(mail);
+            //MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], model.ContactPersonEmail);
+            //SmtpClient client = new SmtpClient();
+            //client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.UseDefaultCredentials = false;
+            //client.Host = ConfigurationManager.AppSettings["SmtpHost"];
+            //mail.Subject = "New registration in to Sambari Enterprises";
+            //mail.Body = emailBody;
+            //mail.IsBodyHtml = true;
+            //client.Send(mail);
+
+            //SmtpClient client = new SmtpClient("in.mailjet.com ", 465)
+            //{
+            //    Credentials = new NetworkCredential("f57dfa92125cde464b72bd53233a8d01", "f8fc65bc7a4451411025894add71b2f1"),
+            //    EnableSsl = true
+            //};
+
+            var mailMessage = new System.Net.Mail.MailMessage();
+            mailMessage.To.Add(model.Email);
+            mailMessage.Subject = "New registration in to Sambari Enterprises";
+            mailMessage.Body = emailBody;
+            mailMessage.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient();
+            smtpClient.Send(mailMessage);
 
             return true;
         }
@@ -74,16 +89,25 @@ namespace SambariEnterprises.Helpers
                 emailBody = emailBodyHtml;
             }
 
-            MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], ConfigurationManager.AppSettings["AdminEmail"]);
-            SmtpClient client = new SmtpClient();
-            client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = ConfigurationManager.AppSettings["SmtpHost"];
-            mail.Subject = "New registration in to Sambari Enterprises";
-            mail.Body = emailBody;
-            mail.IsBodyHtml = true;
-            client.Send(mail);
+            //MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], ConfigurationManager.AppSettings["AdminEmail"]);
+            //SmtpClient client = new SmtpClient();
+            //client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.UseDefaultCredentials = false;
+            //client.Host = ConfigurationManager.AppSettings["SmtpHost"];
+            //mail.Subject = "New registration in to Sambari Enterprises";
+            //mail.Body = emailBody;
+            //mail.IsBodyHtml = true;
+            //client.Send(mail);
+
+            var mailMessage = new System.Net.Mail.MailMessage();
+            mailMessage.To.Add(ConfigurationManager.AppSettings["FromMail"]);
+            mailMessage.Subject = "New registration in to Sambari Enterprises";
+            mailMessage.Body = emailBody;
+            mailMessage.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient();
+            smtpClient.Send(mailMessage);
 
             return true;
         }
@@ -110,15 +134,61 @@ namespace SambariEnterprises.Helpers
                 emailBody = emailBodyHtml;
             }
 
-            MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], memberViewModel.Email);
-            SmtpClient client = new SmtpClient();
-            client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Host = ConfigurationManager.AppSettings["SmtpHost"];
-            mail.Subject = "Sambari Enterprises - Login Details";
-            mail.Body = emailBody;
-            client.Send(mail);
+            //MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], memberViewModel.Email);
+            //SmtpClient client = new SmtpClient();
+            //client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.UseDefaultCredentials = false;
+            //client.Host = ConfigurationManager.AppSettings["SmtpHost"];
+            //mail.Subject = "Sambari Enterprises - Login Details";
+            //mail.Body = emailBody;
+            //client.Send(mail);
+
+            var mailMessage = new System.Net.Mail.MailMessage();
+            mailMessage.To.Add(memberViewModel.Email);
+            mailMessage.Subject = "Sambari Enterprises - Login Details";
+            mailMessage.Body = emailBody;
+            mailMessage.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient();
+            smtpClient.Send(mailMessage);
+
+            return true;
+        }
+
+        public static bool SendPasswordChangeMail(string password, string email)
+        {
+            string emailBody = string.Empty;
+            // This to supress warnings from razor engine template
+            IRazorEngineService razorService = RazorEngineService.Create(new TemplateServiceConfiguration
+            {
+                DisableTempFileLocking = false,
+                CachingProvider = new DefaultCachingProvider(t => { })
+            });
+
+            //var model = new RegistrationViewModel { Password = password, Email = email };
+
+            //Engine.Razor = razorService;
+
+            //string templatePath = HttpContext.Current.Server.MapPath("~/Content/EmailTemplates/UserPasswordChangeTemplate.cshtml");
+
+            //using (var reader = new StreamReader(templatePath))
+            //{
+            //    var template = reader.ReadToEnd();
+            //    Engine.Razor.AddTemplate("UserPasswordChangeTemplate", template);
+            //    var emailBodyHtml = Engine.Razor.RunCompile("UserPasswordChangeTemplate", typeof(RegistrationViewModel), model);
+            //    emailBody = emailBodyHtml;
+            //}
+
+            //MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], model.Email);
+            //SmtpClient client = new SmtpClient();
+            //client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.UseDefaultCredentials = false;
+            //client.Host = ConfigurationManager.AppSettings["SmtpHost"];
+            //mail.Subject = "Sambari Enterprises - Password Changed";
+            //mail.Body = emailBody;
+            //client.Send(mail);
 
             return true;
         }

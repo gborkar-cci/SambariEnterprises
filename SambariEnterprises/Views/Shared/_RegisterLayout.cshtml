@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/site-css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/css/plugins/datapicker/datepicker.css" rel="stylesheet">
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body class="white-bg register">
+    <div class="register-bg">
+        <div class="middle-box">
+            <header>
+                <div class="logo">
+                    <img src="~/Content/images/se-logo.jpg" class="img-responsive" alt="Sambari Enterprises">
+                </div>
+            </header>
+
+            <div class="col-sm-12 form">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

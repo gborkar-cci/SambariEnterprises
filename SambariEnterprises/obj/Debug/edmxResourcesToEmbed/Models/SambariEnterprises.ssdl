@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SambariEnterprisesModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="SambariEnterprisesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="MemberRegistration">
     <Key>
       <PropertyRef Name="ID" />
@@ -8,18 +8,32 @@
     <Property Name="ResourceID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="MemberID" Type="bigint" Nullable="false" />
     <Property Name="MasterID" Type="bigint" />
+    <Property Name="CustomerName" Type="varchar(max)" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="PinCode" Type="int" />
+    <Property Name="CustomerPhone" Type="varchar" MaxLength="20" />
     <Property Name="Constitution" Type="varchar" MaxLength="50" />
-    <Property Name="OwnerName" Type="varchar" MaxLength="50" />
-    <Property Name="ContactPersonName" Type="varchar" MaxLength="50" />
-    <Property Name="PharmacyName" Type="varchar" MaxLength="100" />
-    <Property Name="Address" Type="varchar" MaxLength="100" />
-    <Property Name="Phone" Type="varchar" MaxLength="15" />
-    <Property Name="DrugLicenceNumber" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerName" Type="varchar(max)" />
+    <Property Name="AuthorizedPersonName" Type="varchar" MaxLength="100" />
+    <Property Name="MobileNumber" Type="varchar" MaxLength="10" />
+    <Property Name="DrugLicenceNumber1" Type="varchar" MaxLength="50" />
+    <Property Name="DrugLicenceExpiry1" Type="datetime" />
+    <Property Name="DrugLicenceNumber2" Type="varchar" MaxLength="50" />
+    <Property Name="DrugLicenceExpiry2" Type="datetime" />
+    <Property Name="DrugLicenceNumber3" Type="varchar" MaxLength="50" />
+    <Property Name="DrugLicenceExpiry3" Type="datetime" />
+    <Property Name="DrugLicenceNumber4" Type="varchar" MaxLength="50" />
+    <Property Name="DrugLicenceExpiry4" Type="datetime" Nullable="false" />
+    <Property Name="ContactPersonName" Type="varchar(max)" />
+    <Property Name="ContactPersonMobile" Type="varchar" MaxLength="10" />
+    <Property Name="ContactPersonEmail" Type="varchar" MaxLength="255" />
     <Property Name="DrugLicenceExpiry" Type="date" />
     <Property Name="TinNumber" Type="varchar" MaxLength="50" />
+    <Property Name="ApplicationReferenceNumber" Type="varchar" MaxLength="50" />
     <Property Name="PanNumber" Type="varchar" MaxLength="50" />
     <Property Name="RegisteredForGst" Type="bit" />
     <Property Name="GSTResgistrationNumber" Type="varchar" MaxLength="50" />
+    <Property Name="GSTAcknowledgement" Type="varchar" MaxLength="255" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CreatedBy" Type="bigint" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -38,6 +52,7 @@
     <Property Name="HashCode" Type="varchar" MaxLength="100" />
     <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="IPAddress" Type="varchar" MaxLength="50" />
+    <Property Name="IsTempPassword" Type="bit" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CreatedBy" Type="bigint" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -108,7 +123,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="SambariEnterprisesModel1StoreContainer">
+  <EntityContainer Name="SambariEnterprisesModelStoreContainer">
     <EntitySet Name="MemberRegistration" EntityType="Self.MemberRegistration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />

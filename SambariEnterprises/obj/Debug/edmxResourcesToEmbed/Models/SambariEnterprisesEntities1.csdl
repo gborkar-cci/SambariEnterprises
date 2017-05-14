@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SambariEnterprisesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MemberRegistration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Guid" Nullable="false" />
+    <Property Name="MemberID" Type="Int64" Nullable="false" />
+    <Property Name="MasterID" Type="Int64" />
+    <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PinCode" Type="Int32" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Constitution" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorizedPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceNumber1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry1" Type="DateTime" Precision="3" />
+    <Property Name="DrugLicenceNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry2" Type="DateTime" Precision="3" />
+    <Property Name="DrugLicenceNumber3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry3" Type="DateTime" Precision="3" />
+    <Property Name="DrugLicenceNumber4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry4" Type="DateTime" Precision="3" />
+    <Property Name="ContactPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPersonMobile" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPersonEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DrugLicenceExpiry" Type="DateTime" Precision="0" />
+    <Property Name="TinNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ApplicationRreferenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PanNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RegisteredForGst" Type="Boolean" />
+    <Property Name="GSTResgistrationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_MemberRegistration_Members" FromRole="MemberRegistration" ToRole="Members" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Guid" Nullable="false" />
+    <Property Name="RoleID" Type="Int64" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HashCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MemberRegistrations" Relationship="Self.FK_MemberRegistration_Members" FromRole="Members" ToRole="MemberRegistration" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Members_Role" FromRole="Members" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Guid" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Members_Role" FromRole="Role" ToRole="Members" />
+    <NavigationProperty Name="SystemUsers" Relationship="Self.FK_SystemUser_Role" FromRole="Role" ToRole="SystemUser" />
+  </EntityType>
+  <EntityType Name="SystemUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResourceID" Type="Guid" Nullable="false" />
+    <Property Name="RoleID" Type="Int64" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HashCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_SystemUser_Role" FromRole="SystemUser" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_MemberRegistration_Members">
+    <End Role="Members" Type="Self.Member" Multiplicity="1" />
+    <End Role="MemberRegistration" Type="Self.MemberRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MemberRegistration">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Members_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Members">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SystemUser_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SystemUser">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SambariEnterprisesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MemberRegistrations" EntityType="Self.MemberRegistration" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
+    <AssociationSet Name="FK_MemberRegistration_Members" Association="Self.FK_MemberRegistration_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MemberRegistration" EntitySet="MemberRegistrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Members_Role" Association="Self.FK_Members_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SystemUser_Role" Association="Self.FK_SystemUser_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="SystemUser" EntitySet="SystemUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

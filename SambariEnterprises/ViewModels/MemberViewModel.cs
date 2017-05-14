@@ -10,6 +10,8 @@ namespace SambariEnterprises.ViewModels
     public class MemberViewModel
     {
         public long ID { get; set; }
+        public string ImageUrl { get; set; }
+        
         public long MemberID { get; set; }
 
         [Display(Name = "Email")]
@@ -18,8 +20,8 @@ namespace SambariEnterprises.ViewModels
         [Display(Name = "Owner Name")]
         public string OwnerName { get; set; }
 
-        [Display(Name = "Pharmacy Number")]
-        public string PharmacyName { get; set; }
+        [Display(Name = "Customer Number")]
+        public string CustomerName { get; set; }
 
         [Display(Name = "Address")]
         public string Address { get; set; }

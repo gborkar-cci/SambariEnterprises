@@ -1,20 +1,308 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-        Your Login details for access Sambari Enterprises Portal.
-        Username : @Model.Username <br />
-        Password : @Model.Password <br />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">
+    <title>Sambari Enterprises</title>
+    <style type="text/css">
+* {
+	-webkit-text-size-adjust: none;
+	-webkit-font-smoothing: antialiased;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+.ReadMsgBody {
+	width: 100%;
+}
+.ExternalClass {
+	width: 100%;
+}
+.ExternalClass * {
+	line-height: 100%;
+}
+table tr td {
+	mso-line-height-rule: exactly;
+}
+span.yshortcuts {
+	color: #000;
+}
+span.yshortcuts:hover, span.yshortcuts:active, span.yshortcuts:focus {
+	text-decoration: none;
+	color: #000;
+	background-color: none;
+	border: none;
+}
+th {
+	font-weight: normal !important;
+	text-align: left;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.noLink a {
+	color: #233960 !important;
+	text-decoration: none !important;
+}
 
-    </div>
+span[class=noLink] a {
+	text-decoration: none !important;
+	color: #233960 !important;
+}
+
+span a [class=noLink] {
+	color: #233960 !important;
+	text-decoration: none !important;
+}
+
+span[class=noLink] a:visited, span[class=noLink] a:focus{
+	text-decoration: none !important;
+	color: #233960 !important;
+}
+.noLink a:visited, .noLink a:focus, {
+	color: #233960 !important;
+	text-decoration: none !important;
+}
+
+span a:visited[class=noLink], span a:focus[class=noLink] {
+	color: #233960 !important;
+	text-decoration: none !important;
+}
+
+.hide-desktop {
+	display: none !important;
+}
+
+@@media handheld, screen and (max-width: 480px) {
+	td {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
+	table[class=bodyWidth] {
+		width: 320px !important;
+		min-width: 320px !important;
+	}
+	td[class=hide], table[class=hide], img[class=hide], br[class=hide] {
+		display: none !important;
+		height: 0 !important;
+	}
+	td[class=fontSize11] {
+		font-size: 10px !important;
+		line-height: 13px !important;
+	}
+	td[class=fontSize13] {
+		font-size: 13px !important;
+		line-height: 13px !important;
+	}
+	td[class=fontSize14] {
+		font-size: 14px !important;
+		line-height: 16px !important;
+	}
+	td[class=fontSize16] {
+		font-size: 16px !important;
+		line-height: 18px !important;
+	}
+	td[class=fontSize17] {
+		font-size: 17px !important;
+		line-height: 19px !important;
+	}
+	img[class=spacerheight9] {
+		height: 9px !important;
+	}
+	img[class=spacerheight15] {
+		height: 15px !important;
+	}
+	img[class=spacerheight20] {
+		height: 20px !important;
+	}
+	img[class=spacerWidth0]{
+		width: 0px !important;
+	}
+	img[class=spacerWidth10], td[class=spacerWidth10]{
+		width: 10px !important;
+	}
+	td[class=spacerWidth16]{
+		width: 16px !important;
+	}
+	td[class=spacerWidth24]{
+		width: 24px !important;
+	}
+	img[class=spacerWidth20] {
+		width: 20px !important;
+	}
+	th[class=inline] {
+		display: table;
+	}
+	.hide-desktop {
+		display: block !important;
+	}
+	td[class=hide-desktop] {
+		display: block !important;
+	}
+	td[class=mobBanner] {
+		background:url(@Model.ImageUrl/images/banner-mob.jpg);
+		background-size: 320px 127px;
+		width: 320px;
+		height: 127px;
+		display: block;
+	}
+	td[class=mobBanner] a{
+		display: block;
+		width: 320px;
+		height: 127px;
+	}
+	td[class=mobCallout] {
+		background:url(@Model.ImageUrl/images/callout-banner-mob.jpg);
+		background-size: 320px 279px;
+		width: 320px;
+		height: 279px;
+		display: block;
+	}
+    td[class=mobDisclaimer] {
+        background:url(@Model.ImageUrl/images/callout-disclaimer-mob.jpg);
+		background-size: 320px 100px;
+		width: 320px;
+		height: 100px;
+		display: block;
+    }
+	td[class=mobYellowLine] {
+		background:url(@Model.ImageUrl/images/yellow-horizontal-line-mob.jpg);
+		background-size: 320px 2px;
+		width: 320px;
+		height: 2px;
+		display: block;
+	}
+
+	th[class=inline] {display: table; width:100%;}
+	img[class=display-inline]{ display:inline-block !important;}
+	th[class=inline1]{display: table; width:100%; text-align:center !important; height:40px;}
+}
+    </style>
+
+    <!--[if gte mso 9]>
+    <style type="text/css">
+        small {
+        font-size: 100% !important;
+        }
+    </style>
+    <![endif]-->
+    <!--[if IE]>
+    <style type="text/css">
+        sup {
+        font-size: 78% !important;
+        line-height: 78% !important;
+        }
+        sup small {
+        font-size: 100% !important;
+        }
+    </style>
+    <![endif]-->
+</head>
+
+<body bgcolor="#ffffff" style="margin:0 auto; padding:0; margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:100%">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="-webkit-text-size-adjust: none;">
+        <tr style="font-size:1px; line-height:1px;">
+            <td style="display:none !important; visibility:hidden; mso-hide:all; color:#ffffff; font-size:1px; line-height:1px; max-height:0px; max-width:0px; opacity:0; overflow:hidden;">
+                Hello. I’m so glad you’re joining us.
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table cellpadding="0" cellspacing="0" border="0" width="600" class="bodyWidth" style="min-width: 600px;">
+                    <tr>
+                        <td align="left">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr>
+                                    <td class="mobBanner"><a href="#" target="_blank" style="display:block;"><img width="600" height="335" border="0" style="display:block;" class="hide" alt="" src="@Model.ImageUrl/images/se-logo.jpg"></a></td>
+                                </tr>
+                                <tr style="line-height: 20px;">
+                                    <td><img width="1" height="20" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif"></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellpadding="5" cellspacing="5" border="0" width="100%">
+                                            <tr>
+                                                <td><img width="68" height="1" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif" class="spacerWidth10"></td>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;" colspan="2">
+                                                                Dear @Model.CustomerName,
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="line-height: 24px;">
+                                                            <td><img width="1" height="24" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif"></td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;" colspan="2">
+                                                                We once again thank you for registering on <a href="http://www.sambarienterprises.in" target="_blank">www.sambarienterprises.in</a> . Please find below your Username and Password to log into the portal
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="line-height: 24px;">
+                                                            <td><img width="1" height="24" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif"></td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;">Username :</td>
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;">&nbsp;&nbsp;@Model.Username</td>
+                                                        </tr>
+                                                        <tr style="line-height: 10px;">
+                                                            <td><img width="1" height="10" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif"></td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;">Password :</td>
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;">&nbsp;&nbsp;@Model.Password</td>
+                                                        </tr>
+                                                        <tr style="line-height: 24px;">
+                                                            <td><img width="1" height="24" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif"></td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;" colspan="2">
+                                                                Upon your first login you would be allowed to change your password. Please use the forgot password link on the home page if you wish to reset your password in future.
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="line-height: 24px;">
+                                                            <td><img width="1" height="24" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif"></td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;" colspan="2">
+                                                                We would inform you once we go live. We value our business association and thank you for your support.
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="line-height: 5px;">
+                                                            <td><img width="1" height="5" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif" class="spacerheight15"></td>
+                                                        </tr>
+                                                        <tr style="line-height: 25px;">
+                                                            <td><img width="1" height="25" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif" class="spacerheight15"></td>
+                                                        </tr>
+                                                        <tr style="line-height: 30px;">
+                                                            <td><img width="1" height="30" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif" class="spacerheight20"></td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;" colspan="2">
+                                                                <strong>Kind Regards</strong>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px; line-height: 22px;">
+                                                            <td style="font-family: Arial, Helvetica, sans-serif; color: #233960; font-size: 12px; line-height: 22px;" colspan="2">
+                                                                <strong>Sambari Enterprises</strong>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td><img width="68" height="1" border="0" style="display:block;" alt="" src="@Model.ImageUrl/images/spacer.gif" class="spacerWidth10"></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
+

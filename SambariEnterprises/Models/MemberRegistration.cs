@@ -18,23 +18,38 @@ namespace SambariEnterprises.Models
         public System.Guid ResourceID { get; set; }
         public long MemberID { get; set; }
         public Nullable<long> MasterID { get; set; }
-        public string PharmacyName { get; set; }
+        public string CustomerName { get; set; }
         public string Address { get; set; }
-        public string Phone { get; set; }
-        public string DrugLicenceNumber { get; set; }
+        public Nullable<int> PinCode { get; set; }
+        public string CustomerPhone { get; set; }
+        public string Constitution { get; set; }
+        public string OwnerName { get; set; }
+        public string AuthorizedPersonName { get; set; }
+        public string MobileNumber { get; set; }
+        public string DrugLicenceNumber1 { get; set; }
+        public Nullable<System.DateTime> DrugLicenceExpiry1 { get; set; }
+        public string DrugLicenceNumber2 { get; set; }
+        public Nullable<System.DateTime> DrugLicenceExpiry2 { get; set; }
+        public string DrugLicenceNumber3 { get; set; }
+        public Nullable<System.DateTime> DrugLicenceExpiry3 { get; set; }
+        public string DrugLicenceNumber4 { get; set; }
+        public System.DateTime DrugLicenceExpiry4 { get; set; }
+        public string ContactPersonName { get; set; }
+        public string ContactPersonMobile { get; set; }
+        public string ContactPersonEmail { get; set; }
+        public Nullable<System.DateTime> DrugLicenceExpiry { get; set; }
         public string TinNumber { get; set; }
+        public string ApplicationReferenceNumber { get; set; }
+        public string PanNumber { get; set; }
+        public Nullable<bool> RegisteredForGst { get; set; }
         public string GSTResgistrationNumber { get; set; }
+        public string GSTAcknowledgement { get; set; }
+        public string GSTAcknowledgementName { get; set; }
         public bool IsActive { get; set; }
         public long CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<long> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public string OwnerName { get; set; }
-        public string ContactPersonName { get; set; }
-        public Nullable<System.DateTime> DrugLicenceExpiry { get; set; }
-        public string Constitution { get; set; }
-        public string PanNumber { get; set; }
-        public Nullable<bool> RegisteredForGst { get; set; }
     
         public virtual Member Member { get; set; }
     }

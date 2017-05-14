@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SambariEnterprisesModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SambariEnterprisesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MemberRegistration">
           <Key>
             <PropertyRef Name="ID" />
@@ -13,18 +13,32 @@
           <Property Name="ResourceID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MemberID" Type="bigint" Nullable="false" />
           <Property Name="MasterID" Type="bigint" />
+          <Property Name="CustomerName" Type="varchar(max)" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="PinCode" Type="int" />
+          <Property Name="CustomerPhone" Type="varchar" MaxLength="20" />
           <Property Name="Constitution" Type="varchar" MaxLength="50" />
-          <Property Name="OwnerName" Type="varchar" MaxLength="50" />
-          <Property Name="ContactPersonName" Type="varchar" MaxLength="50" />
-          <Property Name="PharmacyName" Type="varchar" MaxLength="100" />
-          <Property Name="Address" Type="varchar" MaxLength="100" />
-          <Property Name="Phone" Type="varchar" MaxLength="15" />
-          <Property Name="DrugLicenceNumber" Type="varchar" MaxLength="50" />
+          <Property Name="OwnerName" Type="varchar(max)" />
+          <Property Name="AuthorizedPersonName" Type="varchar" MaxLength="100" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="10" />
+          <Property Name="DrugLicenceNumber1" Type="varchar" MaxLength="50" />
+          <Property Name="DrugLicenceExpiry1" Type="datetime" />
+          <Property Name="DrugLicenceNumber2" Type="varchar" MaxLength="50" />
+          <Property Name="DrugLicenceExpiry2" Type="datetime" />
+          <Property Name="DrugLicenceNumber3" Type="varchar" MaxLength="50" />
+          <Property Name="DrugLicenceExpiry3" Type="datetime" />
+          <Property Name="DrugLicenceNumber4" Type="varchar" MaxLength="50" />
+          <Property Name="DrugLicenceExpiry4" Type="datetime" Nullable="false" />
+          <Property Name="ContactPersonName" Type="varchar(max)" />
+          <Property Name="ContactPersonMobile" Type="varchar" MaxLength="10" />
+          <Property Name="ContactPersonEmail" Type="varchar" MaxLength="255" />
           <Property Name="DrugLicenceExpiry" Type="date" />
           <Property Name="TinNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ApplicationReferenceNumber" Type="varchar" MaxLength="50" />
           <Property Name="PanNumber" Type="varchar" MaxLength="50" />
           <Property Name="RegisteredForGst" Type="bit" />
           <Property Name="GSTResgistrationNumber" Type="varchar" MaxLength="50" />
+          <Property Name="GSTAcknowledgement" Type="varchar" MaxLength="255" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="bigint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -43,6 +57,7 @@
           <Property Name="HashCode" Type="varchar" MaxLength="100" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IPAddress" Type="varchar" MaxLength="50" />
+          <Property Name="IsTempPassword" Type="bit" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="bigint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -113,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SambariEnterprisesModel1StoreContainer">
+        <EntityContainer Name="SambariEnterprisesModelStoreContainer">
           <EntitySet Name="MemberRegistration" EntityType="Self.MemberRegistration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -134,7 +149,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SambariEnterprisesModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SambariEnterprisesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="MemberRegistration">
           <Key>
             <PropertyRef Name="ID" />
@@ -143,24 +158,38 @@
           <Property Name="ResourceID" Type="Guid" Nullable="false" />
           <Property Name="MemberID" Type="Int64" Nullable="false" />
           <Property Name="MasterID" Type="Int64" />
-          <Property Name="PharmacyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="DrugLicenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PinCode" Type="Int32" />
+          <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Constitution" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AuthorizedPersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DrugLicenceNumber1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrugLicenceExpiry1" Type="DateTime" Precision="3" />
+          <Property Name="DrugLicenceNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrugLicenceExpiry2" Type="DateTime" Precision="3" />
+          <Property Name="DrugLicenceNumber3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrugLicenceExpiry3" Type="DateTime" Precision="3" />
+          <Property Name="DrugLicenceNumber4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DrugLicenceExpiry4" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ContactPersonName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPersonMobile" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPersonEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DrugLicenceExpiry" Type="DateTime" Precision="0" />
           <Property Name="TinNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationReferenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PanNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegisteredForGst" Type="Boolean" />
           <Property Name="GSTResgistrationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GSTAcknowledgement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="Int64" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedBy" Type="Int64" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Member" Relationship="Self.FK_MemberRegistration_Members" FromRole="MemberRegistration" ToRole="Members" />
-          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContactPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DrugLicenceExpiry" Type="DateTime" Precision="0" />
-          <Property Name="Constitution" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PanNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RegisteredForGst" Type="Boolean" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -168,6 +197,7 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ResourceID" Type="Guid" Nullable="false" />
+          <Property Name="RoleID" Type="Int64" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="HashCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -179,8 +209,21 @@
           <Property Name="UpdatedBy" Type="Int64" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="MemberRegistrations" Relationship="Self.FK_MemberRegistration_Members" FromRole="Members" ToRole="MemberRegistration" />
-          <Property Name="RoleID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="SambariEnterprisesModel1.FK_Members_Role" FromRole="Member" ToRole="Role" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Members_Role" FromRole="Members" ToRole="Role" />
+          <Property Name="IsTempPassword" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceID" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_Members_Role" FromRole="Role" ToRole="Members" />
+          <NavigationProperty Name="SystemUsers" Relationship="Self.FK_SystemUser_Role" FromRole="Role" ToRole="SystemUser" />
         </EntityType>
         <EntityType Name="SystemUser">
           <Key>
@@ -188,6 +231,7 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ResourceID" Type="Guid" Nullable="false" />
+          <Property Name="RoleID" Type="Int64" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HashCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -197,8 +241,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedBy" Type="Int64" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="RoleID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="SambariEnterprisesModel1.FK_SystemUser_Role" FromRole="SystemUser" ToRole="Role" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_SystemUser_Role" FromRole="SystemUser" ToRole="Role" />
         </EntityType>
         <Association Name="FK_MemberRegistration_Members">
           <End Role="Members" Type="Self.Member" Multiplicity="1" />
@@ -212,52 +255,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SambariEnterprisesEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="MemberRegistrations" EntityType="Self.MemberRegistration" />
-          <EntitySet Name="Members" EntityType="Self.Member" />
-          <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
-          <AssociationSet Name="FK_MemberRegistration_Members" Association="Self.FK_MemberRegistration_Members">
-            <End Role="Members" EntitySet="Members" />
-            <End Role="MemberRegistration" EntitySet="MemberRegistrations" />
-          </AssociationSet>
-          <EntitySet Name="Roles" EntityType="SambariEnterprisesModel1.Role" />
-          <AssociationSet Name="FK_Members_Role" Association="SambariEnterprisesModel1.FK_Members_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SystemUser_Role" Association="SambariEnterprisesModel1.FK_SystemUser_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="SystemUser" EntitySet="SystemUsers" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ResourceID" Type="Guid" Nullable="false" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Members" Relationship="SambariEnterprisesModel1.FK_Members_Role" FromRole="Role" ToRole="Member" />
-          <NavigationProperty Name="SystemUsers" Relationship="SambariEnterprisesModel1.FK_SystemUser_Role" FromRole="Role" ToRole="SystemUser" />
-        </EntityType>
         <Association Name="FK_Members_Role">
-          <End Type="SambariEnterprisesModel1.Role" Role="Role" Multiplicity="1" />
-          <End Type="SambariEnterprisesModel1.Member" Role="Member" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Members" Type="Self.Member" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Member">
+            <Dependent Role="Members">
               <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SystemUser_Role">
-          <End Type="SambariEnterprisesModel1.Role" Role="Role" Multiplicity="1" />
-          <End Type="SambariEnterprisesModel1.SystemUser" Role="SystemUser" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="SystemUser" Type="Self.SystemUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="ID" />
@@ -267,31 +279,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="SambariEnterprisesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MemberRegistrations" EntityType="Self.MemberRegistration" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUser" />
+          <AssociationSet Name="FK_MemberRegistration_Members" Association="Self.FK_MemberRegistration_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberRegistration" EntitySet="MemberRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Role" Association="Self.FK_Members_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemUser_Role" Association="Self.FK_SystemUser_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SambariEnterprisesModel1StoreContainer" CdmEntityContainer="SambariEnterprisesEntities1">
+        <EntityContainerMapping StorageEntityContainer="SambariEnterprisesModelStoreContainer" CdmEntityContainer="SambariEnterprisesEntities">
           <EntitySetMapping Name="MemberRegistrations">
-            <EntityTypeMapping TypeName="SambariEnterprisesModel1.MemberRegistration">
+            <EntityTypeMapping TypeName="SambariEnterprisesModel.MemberRegistration">
               <MappingFragment StoreEntitySet="MemberRegistration">
-                <ScalarProperty Name="RegisteredForGst" ColumnName="RegisteredForGst" />
-                <ScalarProperty Name="PanNumber" ColumnName="PanNumber" />
-                <ScalarProperty Name="Constitution" ColumnName="Constitution" />
-                <ScalarProperty Name="DrugLicenceExpiry" ColumnName="DrugLicenceExpiry" />
-                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
-                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />
-                <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="DrugLicenceNumber" ColumnName="DrugLicenceNumber" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+                <ScalarProperty Name="Constitution" ColumnName="Constitution" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="AuthorizedPersonName" ColumnName="AuthorizedPersonName" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="DrugLicenceNumber1" ColumnName="DrugLicenceNumber1" />
+                <ScalarProperty Name="DrugLicenceExpiry1" ColumnName="DrugLicenceExpiry1" />
+                <ScalarProperty Name="DrugLicenceNumber2" ColumnName="DrugLicenceNumber2" />
+                <ScalarProperty Name="DrugLicenceExpiry2" ColumnName="DrugLicenceExpiry2" />
+                <ScalarProperty Name="DrugLicenceNumber3" ColumnName="DrugLicenceNumber3" />
+                <ScalarProperty Name="DrugLicenceExpiry3" ColumnName="DrugLicenceExpiry3" />
+                <ScalarProperty Name="DrugLicenceNumber4" ColumnName="DrugLicenceNumber4" />
+                <ScalarProperty Name="DrugLicenceExpiry4" ColumnName="DrugLicenceExpiry4" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+                <ScalarProperty Name="ContactPersonMobile" ColumnName="ContactPersonMobile" />
+                <ScalarProperty Name="ContactPersonEmail" ColumnName="ContactPersonEmail" />
+                <ScalarProperty Name="DrugLicenceExpiry" ColumnName="DrugLicenceExpiry" />
                 <ScalarProperty Name="TinNumber" ColumnName="TinNumber" />
+                <ScalarProperty Name="ApplicationReferenceNumber" ColumnName="ApplicationReferenceNumber" />
+                <ScalarProperty Name="PanNumber" ColumnName="PanNumber" />
+                <ScalarProperty Name="RegisteredForGst" ColumnName="RegisteredForGst" />
                 <ScalarProperty Name="GSTResgistrationNumber" ColumnName="GSTResgistrationNumber" />
+                <ScalarProperty Name="GSTAcknowledgement" ColumnName="GSTAcknowledgement" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -301,11 +345,12 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Members">
-            <EntityTypeMapping TypeName="SambariEnterprisesModel1.Member">
+            <EntityTypeMapping TypeName="SambariEnterprisesModel.Member">
               <MappingFragment StoreEntitySet="Members">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="IsTempPassword" ColumnName="IsTempPassword" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="HashCode" ColumnName="HashCode" />
@@ -319,12 +364,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SystemUsers">
-            <EntityTypeMapping TypeName="SambariEnterprisesModel1.SystemUser">
-              <MappingFragment StoreEntitySet="SystemUser">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="SambariEnterprisesModel.Role">
+              <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="SambariEnterprisesModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="HashCode" ColumnName="HashCode" />
@@ -334,18 +391,6 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="SambariEnterprisesModel1.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

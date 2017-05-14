@@ -53,6 +53,10 @@
       <HintPath>..\packages\ExpressiveAnnotations.dll.2.7.1\lib\net45\ExpressiveAnnotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Mailjet.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mailjet.Api.1.0.0-rc\lib\netstandard1.1\Mailjet.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net40\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -145,11 +149,27 @@
       <HintPath>..\packages\RazorEngine.3.9.3\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SendGrid.CSharp.HTTP.Client, Version=2.0.0.0, Culture=neutral, PublicKeyToken=79219bf4e5ecaaca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.CSharp.HTTP.Client.2.0.1\lib\SendGrid.CSharp.HTTP.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -227,8 +247,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\BasicAuthenticationAttribute.cs" />
     <Compile Include="Attributes\CustomAuthenticationAttribute.cs" />
+    <Compile Include="Attributes\RedirectingActionAttribute.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -262,6 +285,7 @@
       <DependentUpon>SambariEnterprises.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ChangePassword.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MemberViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
@@ -303,13 +327,6 @@
     </Content>
     <Content Include="Content\EmailTemplates\UserEmailTemplate.cshtml" />
     <Content Include="Content\EmailTemplates\UserRegistrationEmailTemplate.cshtml" />
-    <EntityDeploy Include="Models\SambariEnterprises.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SambariEnterprises.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SambariEnterprises.edmx.diagram">
-      <DependentUpon>SambariEnterprises.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\EmailTemplates\UserDetailsEmailTemplate.cshtml" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.ttf" />
@@ -348,6 +365,14 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\EmailTemplates\UserChangePasswordDetails.cshtml" />
+    <EntityDeploy Include="Models\SambariEnterprises.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SambariEnterprises.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SambariEnterprises.edmx.diagram">
+      <DependentUpon>SambariEnterprises.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\SambariEnterprises.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -389,9 +414,13 @@
     <Content Include="Views\Members\LoginDetails.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Members\RegisteredMembers.cshtml" />
+    <Content Include="Views\User\Dashboard.cshtml" />
+    <Content Include="Views\Shared\_RegisterLayout.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

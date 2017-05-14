@@ -13,10 +13,10 @@ namespace SambariEnterprises.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SambariEnterprisesEntities1 : DbContext
+    public partial class SambariEnterprisesEntities : DbContext
     {
-        public SambariEnterprisesEntities1()
-            : base("name=SambariEnterprisesEntities1")
+        public SambariEnterprisesEntities()
+            : base("name=SambariEnterprisesEntities")
         {
         }
     
@@ -27,7 +27,7 @@ namespace SambariEnterprises.Models
     
         public virtual DbSet<MemberRegistration> MemberRegistrations { get; set; }
         public virtual DbSet<Member> Members { get; set; }
-        public virtual DbSet<SystemUser> SystemUsers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<SystemUser> SystemUsers { get; set; }
     }
 }
