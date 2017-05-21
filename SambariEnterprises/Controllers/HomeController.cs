@@ -8,6 +8,7 @@ using SambariEnterprises.Models;
 using System.Data.Entity;
 using SambariEnterprises.Helpers;
 using SambariEnterprises.Attributes;
+using System.Security.Cryptography;
 
 namespace SambariEnterprises.Controllers
 {
@@ -31,6 +32,29 @@ namespace SambariEnterprises.Controllers
         {
             var model = new ChangePasswordViewModel();
             return View(model);
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            var forgotPasswordViewModel = new ForgotPasswordViewModel();
+
+            return View(forgotPasswordViewModel);
+        }
+
+        public ActionResult ResetPassword(string id)
+        {
+            var changePasswordViewModel = new ChangePasswordViewModel();
+
+            var member = db.Members.FirstOrDefault(x => x.UserToken == id);
+
+            if(member == null)
+            {
+                TempData["Error"] = "Invalid User token.";
+                return Redirect("home/login");
+            }
+
+            changePasswordViewModel.UserID = member.ID;
+            return View(changePasswordViewModel);
         }
 
         #region POST
@@ -136,6 +160,70 @@ namespace SambariEnterprises.Controllers
             return View(changePasswordViewModel);
 
         }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel forgotPasswordViewModel)
+        {
+            if(forgotPasswordViewModel != null)
+            {
+                var member = db.Members.FirstOrDefault(x => x.UserName == forgotPasswordViewModel.UserName);
+                if (member == null)
+                {
+                    ModelState.AddModelError("username", "Username entered does not exists.");
+                    return View(forgotPasswordViewModel);
+                }
+
+                member.UserToken = PasswordHelper.GeneratePassword(10); ;
+
+                //if (isTokenNull)
+                //    db.Members.Add(member);
+                //else
+                //{
+                    db.Members.Attach(member);
+                    var entry = db.Entry(member);
+                    entry.Property(e => e.UserToken).IsModified = true;
+                //}
+
+                db.SaveChanges();
+
+                EmailHelper.SendResetPasswordMail(member.Email, forgotPasswordViewModel);
+
+                TempData["Success"] = "Reset password successful. Email has been sent for further instructions.";
+                return Redirect("/home/login");
+            }
+
+            return View(forgotPasswordViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ChangePasswordViewModel changePasswordViewModel)
+        {
+            if (changePasswordViewModel != null)
+            {
+                var userID = changePasswordViewModel.UserID;
+                var member = db.Members.FirstOrDefault(m => m.ID == userID);
+
+                var hashCode = PasswordHelper.GeneratePassword(10);
+                var password = PasswordHelper.EncodePassword(changePasswordViewModel.NewPassword, hashCode);
+
+                member.Password = password;
+                member.HashCode = hashCode;
+                member.UserToken = string.Empty;
+
+                db.Members.Attach(member);
+                var entry = db.Entry(member);
+                entry.Property(e => e.Password).IsModified = true;
+                entry.Property(e => e.HashCode).IsModified = true;
+                entry.Property(e => e.UserToken).IsModified = true;
+                db.SaveChanges();
+
+                TempData["Success"] = "You have successfully changed your password.";
+                return Redirect("/members/index");
+            }
+
+            return View(changePasswordViewModel);
+        }
+
         #endregion
     }
 }
