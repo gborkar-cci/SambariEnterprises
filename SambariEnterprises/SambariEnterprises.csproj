@@ -285,7 +285,8 @@
       <DependentUpon>SambariEnterprises.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\ChangePassword.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MemberViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
@@ -325,7 +326,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\EmailTemplates\UserEmailTemplate.cshtml" />
     <Content Include="Content\EmailTemplates\UserRegistrationEmailTemplate.cshtml" />
     <Content Include="Content\EmailTemplates\UserDetailsEmailTemplate.cshtml" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
@@ -365,7 +365,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\EmailTemplates\UserChangePasswordDetails.cshtml" />
     <EntityDeploy Include="Models\SambariEnterprises.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SambariEnterprises.Designer.cs</LastGenOutput>
@@ -373,6 +372,7 @@
     <Content Include="Models\SambariEnterprises.edmx.diagram">
       <DependentUpon>SambariEnterprises.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\EmailTemplates\ForgotPasswordEmailTemplate.cshtml" />
     <None Include="Properties\PublishProfiles\SambariEnterprises.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -417,6 +417,8 @@
     <Content Include="Views\User\Dashboard.cshtml" />
     <Content Include="Views\Shared\_RegisterLayout.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,7 +29,7 @@ namespace SambariEnterprises.Controllers
 
         public ActionResult ChangePassword()
         {
-            var model = new ChangePassword();
+            var model = new ChangePasswordViewModel();
             return View(model);
         }
 
@@ -106,7 +106,7 @@ namespace SambariEnterprises.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(ChangePassword changePasswordViewModel)
+        public ActionResult ChangePassword(ChangePasswordViewModel changePasswordViewModel)
         {
             if (changePasswordViewModel != null)
             {

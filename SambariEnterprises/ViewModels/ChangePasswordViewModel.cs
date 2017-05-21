@@ -6,8 +6,10 @@ using System.Web;
 
 namespace SambariEnterprises.ViewModels
 {
-    public class ChangePassword
+    public class ChangePasswordViewModel
     {
+        public long UserID { get; set; }
+
         [Required(ErrorMessage = "Please Enter Old Password")]
         [Display(Name = "Enter Old Password")]
         public string CurrentPassword { get; set; }

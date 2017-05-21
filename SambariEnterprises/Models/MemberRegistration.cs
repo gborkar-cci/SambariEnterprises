@@ -44,7 +44,6 @@ namespace SambariEnterprises.Models
         public Nullable<bool> RegisteredForGst { get; set; }
         public string GSTResgistrationNumber { get; set; }
         public string GSTAcknowledgement { get; set; }
-        public string GSTAcknowledgementName { get; set; }
         public bool IsActive { get; set; }
         public long CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }

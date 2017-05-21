@@ -58,6 +58,7 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IPAddress" Type="varchar" MaxLength="50" />
           <Property Name="IsTempPassword" Type="bit" />
+          <Property Name="UserToken" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="bigint" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -211,6 +212,7 @@
           <NavigationProperty Name="MemberRegistrations" Relationship="Self.FK_MemberRegistration_Members" FromRole="Members" ToRole="MemberRegistration" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Members_Role" FromRole="Members" ToRole="Role" />
           <Property Name="IsTempPassword" Type="Boolean" />
+          <Property Name="UserToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -347,6 +349,7 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="SambariEnterprisesModel.Member">
               <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="UserToken" ColumnName="UserToken" />
                 <ScalarProperty Name="IsTempPassword" ColumnName="IsTempPassword" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />

@@ -32,7 +32,24 @@
                                 <span class="clear">
                                     <span class="block m-t-xs">
                                         <strong class="font-bold">@Session["UserName"]</strong>
-                                    </span> <span class="text-muted text-xs block">Super User<b class="caret"></b></span>
+                                    </span> 
+                                    <span class="text-muted text-xs block">
+                                        @{ 
+                                            var customerName = "Super User";
+                                            if (Session["CustomerName"] != null && !string.IsNullOrWhiteSpace(Session["CustomerName"].ToString()))
+                                            {
+                                                customerName = Session["CustomerName"].ToString();
+                                            }
+                                            else
+                                            {
+                                                customerName = "Super User";
+                                            }
+
+                                        }
+                                        
+                                        @customerName
+                                        <b class="caret"></b>
+                                    </span>
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">

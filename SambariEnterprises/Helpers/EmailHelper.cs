@@ -156,7 +156,7 @@ namespace SambariEnterprises.Helpers
             return true;
         }
 
-        public static bool SendPasswordChangeMail(string password, string email)
+        public static bool SendResetPasswordMail(string email, ForgotPasswordViewModel forgotPasswordViewModel)
         {
             string emailBody = string.Empty;
             // This to supress warnings from razor engine template
@@ -166,29 +166,36 @@ namespace SambariEnterprises.Helpers
                 CachingProvider = new DefaultCachingProvider(t => { })
             });
 
-            //var model = new RegistrationViewModel { Password = password, Email = email };
+            Engine.Razor = razorService;
 
-            //Engine.Razor = razorService;
+            string templatePath = HttpContext.Current.Server.MapPath("~/Content/EmailTemplates/ForgotPasswordEmailTemplate.cshtml");
 
-            //string templatePath = HttpContext.Current.Server.MapPath("~/Content/EmailTemplates/UserPasswordChangeTemplate.cshtml");
+            using (var reader = new StreamReader(templatePath))
+            {
+                var template = reader.ReadToEnd();
+                Engine.Razor.AddTemplate("ForgotPasswordEmailTemplate", template);
+                var emailBodyHtml = Engine.Razor.RunCompile("ForgotPasswordEmailTemplate", typeof(ForgotPasswordViewModel), forgotPasswordViewModel);
+                emailBody = emailBodyHtml;
+            }
 
-            //using (var reader = new StreamReader(templatePath))
-            //{
-            //    var template = reader.ReadToEnd();
-            //    Engine.Razor.AddTemplate("UserPasswordChangeTemplate", template);
-            //    var emailBodyHtml = Engine.Razor.RunCompile("UserPasswordChangeTemplate", typeof(RegistrationViewModel), model);
-            //    emailBody = emailBodyHtml;
-            //}
-
-            //MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], model.Email);
+            //MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMail"], memberViewModel.Email);
             //SmtpClient client = new SmtpClient();
             //client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
             //client.DeliveryMethod = SmtpDeliveryMethod.Network;
             //client.UseDefaultCredentials = false;
             //client.Host = ConfigurationManager.AppSettings["SmtpHost"];
-            //mail.Subject = "Sambari Enterprises - Password Changed";
+            //mail.Subject = "Sambari Enterprises - Login Details";
             //mail.Body = emailBody;
             //client.Send(mail);
+
+            var mailMessage = new System.Net.Mail.MailMessage();
+            mailMessage.To.Add(email);
+            mailMessage.Subject = "Sambari Enterprises - Reset Password";
+            mailMessage.Body = emailBody;
+            mailMessage.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient();
+            smtpClient.Send(mailMessage);
 
             return true;
         }
