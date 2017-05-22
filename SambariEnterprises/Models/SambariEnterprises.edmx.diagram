@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d5554de4b6564f168f78cbeb53d3da64" Name="Diagram1" ZoomLevel="71">
+      <Diagram DiagramId="d5554de4b6564f168f78cbeb53d3da64" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="SambariEnterprisesModel.MemberRegistration" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SambariEnterprisesModel.Member" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SambariEnterprisesModel.Role" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />

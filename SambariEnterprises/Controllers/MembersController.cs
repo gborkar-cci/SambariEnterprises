@@ -268,8 +268,8 @@ namespace SambariEnterprises.Controllers
                     EmailHelper.SendUserMail(registrationViewModel);
                     EmailHelper.SendAdminMail(registrationViewModel);
 
-                    TempData["Success"] = "You are registered successfully. You will receive an email with instruction.";
-                    return Redirect("/Home/Login");
+                    //TempData["Success"] = "You are registered successfully. You will receive an email with instruction.";
+                    return Redirect("/Home/Login/regsuccess");
                 }
                 catch(Exception ex)
                 {

@@ -17,8 +17,14 @@ namespace SambariEnterprises.Controllers
     {
         private SambariEnterprisesEntities db = new SambariEnterprisesEntities();
 
-        public ActionResult Login()
+        public ActionResult Login(string id)
         {
+            ViewBag.RegistrationSuccess = !string.IsNullOrWhiteSpace(id) && id.ToLower() == "regsuccess" ? "regsuccess" : string.Empty;
+            ViewBag.InvalidToken = !string.IsNullOrWhiteSpace(id) && id.ToLower() == "invalidusertoken" ? "invalidusertoken" : string.Empty;
+            ViewBag.InvalidLogin = !string.IsNullOrWhiteSpace(id) && id.ToLower() == "invalidlogin" ? "invalidlogin" : string.Empty;
+            ViewBag.ResetPasswordSuccess = !string.IsNullOrWhiteSpace(id) && id.ToLower() == "resetpasswordsuccess" ? "resetpasswordsuccess" : string.Empty; 
+
+
             return View();
         }
 
@@ -49,8 +55,8 @@ namespace SambariEnterprises.Controllers
 
             if(member == null)
             {
-                TempData["Error"] = "Invalid User token.";
-                return Redirect("/home/login");
+                //TempData["Error"] = "Invalid User token.";
+                return Redirect("/home/login/invalidusertoken");
             }
 
             changePasswordViewModel.UserID = member.ID;
@@ -81,8 +87,8 @@ namespace SambariEnterprises.Controllers
                     }
                     else
                     {
-                        TempData["Error"] = "Invalid login details. Please try again.";
-                        return Redirect("/home/login");
+                        //TempData["Error"] = "Invalid login details. Please try again.";
+                        return Redirect("/home/login/invalidlogin");
                     }
                 }
                 else
@@ -113,14 +119,14 @@ namespace SambariEnterprises.Controllers
                         }
                         else
                         {
-                            TempData["Error"] = "Invalid login details. Please try again.";
-                            return Redirect("/home/login");
+                            //TempData["Error"] = "Invalid login details. Please try again.";
+                            return Redirect("/home/login/invalidlogin");
                         }
                     }
                     else
                     {
-                        TempData["Error"] = "Invalid login details. Please try again.";
-                        return Redirect("/home/login");
+                        //TempData["Error"] = "Invalid login details. Please try again.";
+                        return Redirect("/home/login/invalidlogin");
                     }
                 }
             }
@@ -188,8 +194,8 @@ namespace SambariEnterprises.Controllers
 
                 EmailHelper.SendResetPasswordMail(member.Email, forgotPasswordViewModel);
 
-                TempData["Success"] = "Reset password successful. Email has been sent for further instructions.";
-                return Redirect("/home/login");
+                //TempData["Success"] = "Reset password successful. Email has been sent for further instructions.";
+                return Redirect("/home/login/resetpasswordsuccess");
             }
 
             return View(forgotPasswordViewModel);
