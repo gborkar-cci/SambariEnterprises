@@ -50,7 +50,7 @@ namespace SambariEnterprises.Controllers
             if(member == null)
             {
                 TempData["Error"] = "Invalid User token.";
-                return Redirect("home/login");
+                return Redirect("/home/login");
             }
 
             changePasswordViewModel.UserID = member.ID;
