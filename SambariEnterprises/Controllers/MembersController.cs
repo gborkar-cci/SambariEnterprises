@@ -25,12 +25,13 @@ namespace SambariEnterprises.Controllers
         // GET: Registrations
         [CustomAuthorize("SuperAdmin", "User")]
         [RedirectingActionAttribute]
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             if(Convert.ToBoolean(Session["IsSuperAdmin"]))
             {
                 List<MemberViewModel> lstMemberViewModel = new List<MemberViewModel>();
-                var memberRegistrations = db.MemberRegistrations.Where(m => m.Member.UserName == null || m.Member.UserName == string.Empty).Include(m => m.Member);
+                var memberRegistrations = db.MemberRegistrations.Where(m => m.IsActive == true).Where(m => m.Member.UserName == null || m.Member.UserName == string.Empty)
+                                            .Include(m => m.Member);
 
                 if (memberRegistrations != null && memberRegistrations.Count() > 0)
                 {
@@ -47,6 +48,7 @@ namespace SambariEnterprises.Controllers
 
                     }
                 }
+                ViewBag.UpdateSuccess = !string.IsNullOrWhiteSpace(id) && id.ToLower() == "updatesuccess" ? "updatesuccess" : string.Empty;
                 return View(lstMemberViewModel);
             }
             else
@@ -67,8 +69,8 @@ namespace SambariEnterprises.Controllers
             return View(model);
         }
 
-        [CustomAuthorize("SuperAdmin")]
-        [RedirectingActionAttribute]
+        //[CustomAuthorize("SuperAdmin", "Admin")]
+        //[RedirectingActionAttribute]
         public ActionResult GenerateUserNameAndPassword(long id)
         {
             var memberViewModel = new MemberViewModel();
@@ -80,9 +82,9 @@ namespace SambariEnterprises.Controllers
             return View("LoginDetails", memberViewModel);
         }
 
-        [CustomAuthorize("SuperAdmin")]
-        [RedirectingActionAttribute]
-        public ActionResult RegisteredMembers()
+        //[CustomAuthorize("SuperAdmin", "Admin")]
+        //[RedirectingActionAttribute]
+        public ActionResult RegisteredMembers(string id)
         {
             List<MemberViewModel> lstMemberViewModel = new List<MemberViewModel>();
             var registeredMembers = db.MemberRegistrations.Where(m => m.Member.UserName != null && m.IsActive == true).Include(m => m.Member);
@@ -100,18 +102,36 @@ namespace SambariEnterprises.Controllers
                     member.Address = registeredMember.Address;
                     member.GstRegistrationNumber = registeredMember.GSTResgistrationNumber;
                     member.TinNumber = registeredMember.TinNumber;
-                    //member.MobileNumber = registeredMember.Phone;
+                    member.Username = registeredMember.Member.UserName;
+                    member.Password = string.IsNullOrWhiteSpace(registeredMember.Member.UserText) ? string.Empty : SiteHelper.Base64Decode(registeredMember.Member.UserText);
+                    member.DrugLicenceNumber = string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber1) ? string.Empty : registeredMember.DrugLicenceNumber1;
+                    member.DrugLicenceNumber += !string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber1) && registeredMember.DrugLicenceExpiry1.HasValue 
+                                                    ? "(" + registeredMember.DrugLicenceExpiry1.Value.ToString("dd-MM-yyyy") + ")" 
+                                                    : string.Empty;
+                    member.DrugLicenceNumber += string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber2) ? string.Empty : ", " + registeredMember.DrugLicenceNumber2;
+                    member.DrugLicenceNumber += !string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber2) && registeredMember.DrugLicenceExpiry2.HasValue 
+                                                    ? "(" + registeredMember.DrugLicenceExpiry2.Value.ToString("dd-MM-yyyy") + ")" 
+                                                    : string.Empty;
+                    member.DrugLicenceNumber += string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber3) ? string.Empty : ", " + registeredMember.DrugLicenceNumber3;
+                    member.DrugLicenceNumber += !string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber3) && registeredMember.DrugLicenceExpiry3.HasValue 
+                                                    ? "(" + registeredMember.DrugLicenceExpiry3.Value.ToString("dd-MM-yyyy") + ")" 
+                                                    : string.Empty;
+                    member.DrugLicenceNumber += string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber4) ? string.Empty : ", " + registeredMember.DrugLicenceNumber4;
+                    member.DrugLicenceNumber += !string.IsNullOrWhiteSpace(registeredMember.DrugLicenceNumber4) && registeredMember.DrugLicenceExpiry4 != null 
+                                                    ? "(" + registeredMember.DrugLicenceExpiry4.ToString("dd-MM-yyyy") + ")" 
+                                                    : string.Empty;
 
                     lstMemberViewModel.Add(member);
 
                 }
+                ViewBag.UpdateSuccess = !string.IsNullOrWhiteSpace(id) && id.ToLower() == "updatesuccess" ? "updatesuccess" : string.Empty;
             }
 
             return View(lstMemberViewModel);
         }
 
-        [CustomAuthorize("SuperAdmin")]
-        [RedirectingActionAttribute]
+        //[CustomAuthorize("SuperAdmin")]
+        //[RedirectingActionAttribute]
         public ActionResult Edit(long id)
         {
             var model = new RegistrationViewModel();
@@ -124,18 +144,27 @@ namespace SambariEnterprises.Controllers
                 model.Email = registeredMember.Member.Email;
                 model.OwnerName = registeredMember.OwnerName;
                 model.ContactPersonName = registeredMember.ContactPersonName;
-                //model.MobileNumber = registeredMember.Phone;
+                model.PinCode = registeredMember.PinCode.ToString();
+                model.CustomerPhone = registeredMember.CustomerPhone;
+                model.MobileNumber = registeredMember.MobileNumber;
+                model.AuthorizedPersonName = registeredMember.AuthorizedPersonName;
                 model.PanNumber = registeredMember.PanNumber;
                 model.TinNumber = registeredMember.TinNumber;
+                model.ContactPersonEmail = registeredMember.ContactPersonEmail;
+                model.ContactPersonMobileNumber = registeredMember.ContactPersonMobile;
+                model.ContactPersonName = registeredMember.ContactPersonName;
+                model.HasGstRegistrationNumber = string.IsNullOrWhiteSpace(registeredMember.GSTResgistrationNumber) ? false : true;
                 model.GstRegistrationNumber = registeredMember.GSTResgistrationNumber;
+                model.ApplicationReferenceNumber = registeredMember.ApplicationReferenceNumber;
+                //model.GSTAcknowledgement = registeredMember.GSTAcknowledgement;
                 model.DrugLicenceNumber1 = registeredMember.DrugLicenceNumber1.ToString();
                 model.DrugLicenceNumber2 = registeredMember.DrugLicenceNumber2.ToString();
                 model.DrugLicenceNumber3 = registeredMember.DrugLicenceNumber3.ToString();
                 model.DrugLicenceNumber4 = registeredMember.DrugLicenceNumber4.ToString();
-                model.DrugLicenceExpiry1 = registeredMember.DrugLicenceExpiry1.ToString();
-                model.DrugLicenceExpiry2 = registeredMember.DrugLicenceExpiry2.ToString();
-                model.DrugLicenceExpiry3 = registeredMember.DrugLicenceExpiry3.ToString();
-                model.DrugLicenceExpiry4 = registeredMember.DrugLicenceExpiry4.ToString();
+                model.DrugLicenceExpiry1 = registeredMember.DrugLicenceExpiry1.HasValue ? registeredMember.DrugLicenceExpiry1.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                model.DrugLicenceExpiry2 = registeredMember.DrugLicenceExpiry2.HasValue ? registeredMember.DrugLicenceExpiry2.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                model.DrugLicenceExpiry3 = registeredMember.DrugLicenceExpiry3.HasValue ? registeredMember.DrugLicenceExpiry3.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
+                model.DrugLicenceExpiry4 = registeredMember.DrugLicenceExpiry4 != null ? registeredMember.DrugLicenceExpiry4.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy");
                 model.Constitution = registeredMember.Constitution;
                 model.Address = registeredMember.Address;
             }
@@ -287,7 +316,7 @@ namespace SambariEnterprises.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize("SuperAdmin")]
+        //[CustomAuthorize("SuperAdmin", "Admin")]
         public ActionResult Edit(RegistrationViewModel registrationViewModel)
         {
             var member = new Member();
@@ -300,22 +329,11 @@ namespace SambariEnterprises.Controllers
                     memberRegistration = db.MemberRegistrations.Where(mr => mr.ID == registrationViewModel.MemberRegistrationID).FirstOrDefault();
                     member = memberRegistration.Member;
 
-                    if (db.Members.Any(m => m.Email == registrationViewModel.Email && m.IsActive == true && m.ID != member.ID))
-                    {
-                        ModelState.AddModelError("Email", "Email address already exist in the system.");
-                        return View("MemberEdit", registrationViewModel);
-                    }             
-                    
-                    //if(string.IsNullOrWhiteSpace(registrationViewModel.Password))
+                    //if (db.Members.Any(m => m.Email == registrationViewModel.Email && m.IsActive == true && m.ID != member.ID))
                     //{
-                    //    var hashCode = PasswordHelper.GeneratePassword(10);
-                    //    var password = PasswordHelper.EncodePassword(registrationViewModel.Password, hashCode);
-
-                    //    member.Password = password;
-                    //    member.HashCode = hashCode;
-
-                    //    EmailHelper.SendPasswordChangeMail(registrationViewModel.Email, registrationViewModel.Email);
-                    //}
+                    //    ModelState.AddModelError("Email", "Email address already exist in the system.");
+                    //    return View("MemberEdit", registrationViewModel);
+                    //}             
 
                     member.Email = registrationViewModel.Email;
                     member.IsActive = true;
@@ -323,22 +341,33 @@ namespace SambariEnterprises.Controllers
                     member.UpdatedBy = 1;
 
                     memberRegistration.Member = member;
-                    //memberRegistration.PharmacyName = string.IsNullOrWhiteSpace(registrationViewModel.CustomerName) ? string.Empty : registrationViewModel.CustomerName;
-                    memberRegistration.OwnerName = string.IsNullOrWhiteSpace(registrationViewModel.OwnerName) ? string.Empty : registrationViewModel.OwnerName;
-                    memberRegistration.ContactPersonName = string.IsNullOrWhiteSpace(registrationViewModel.ContactPersonName) ? string.Empty : registrationViewModel.ContactPersonName;
-                    memberRegistration.TinNumber = string.IsNullOrWhiteSpace(registrationViewModel.TinNumber) ? string.Empty : registrationViewModel.TinNumber;
+                    memberRegistration.CustomerName = string.IsNullOrWhiteSpace(registrationViewModel.CustomerName) ? string.Empty : registrationViewModel.CustomerName;
                     memberRegistration.Address = string.IsNullOrWhiteSpace(registrationViewModel.Address) ? string.Empty : registrationViewModel.Address;
+                    memberRegistration.PinCode = string.IsNullOrWhiteSpace(registrationViewModel.PinCode) ? 000000 : Convert.ToInt32(registrationViewModel.PinCode);
+                    memberRegistration.CustomerPhone = string.IsNullOrWhiteSpace(registrationViewModel.CustomerPhone) ? string.Empty : registrationViewModel.CustomerPhone;
+                    memberRegistration.Constitution = registrationViewModel.Constitution;
+                    memberRegistration.OwnerName = string.IsNullOrWhiteSpace(registrationViewModel.OwnerName) ? string.Empty : registrationViewModel.OwnerName;
+                    memberRegistration.AuthorizedPersonName = registrationViewModel.AuthorizedPersonName;
+                    memberRegistration.MobileNumber = registrationViewModel.MobileNumber;
                     memberRegistration.DrugLicenceNumber1 = string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceNumber1) ? string.Empty : registrationViewModel.DrugLicenceNumber1;
                     memberRegistration.DrugLicenceNumber2 = string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceNumber2) ? string.Empty : registrationViewModel.DrugLicenceNumber2;
                     memberRegistration.DrugLicenceNumber3 = string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceNumber3) ? string.Empty : registrationViewModel.DrugLicenceNumber3;
                     memberRegistration.DrugLicenceNumber4 = string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceNumber4) ? string.Empty : registrationViewModel.DrugLicenceNumber4;
-                    memberRegistration.DrugLicenceExpiry1 = Convert.ToDateTime(registrationViewModel.DrugLicenceExpiry1);
-                    memberRegistration.DrugLicenceExpiry2 = Convert.ToDateTime(registrationViewModel.DrugLicenceExpiry2);
-                    memberRegistration.DrugLicenceExpiry3 = Convert.ToDateTime(registrationViewModel.DrugLicenceExpiry3);
-                    memberRegistration.DrugLicenceExpiry4 = Convert.ToDateTime(registrationViewModel.DrugLicenceExpiry4);
+                    memberRegistration.DrugLicenceExpiry1 = DateTime.ParseExact(registrationViewModel.DrugLicenceExpiry1, "dd/MM/yyyy", null);
+                    memberRegistration.DrugLicenceExpiry2 = !string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceExpiry2) ? DateTime.ParseExact(registrationViewModel.DrugLicenceExpiry2, "dd/MM/yyyy", null) : DateTime.Now;
+                    memberRegistration.DrugLicenceExpiry3 = !string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceExpiry3) ? DateTime.ParseExact(registrationViewModel.DrugLicenceExpiry3, "dd/MM/yyyy", null) : DateTime.Now;
+                    memberRegistration.DrugLicenceExpiry4 = !string.IsNullOrWhiteSpace(registrationViewModel.DrugLicenceExpiry4) ? DateTime.ParseExact(registrationViewModel.DrugLicenceExpiry4, "dd/MM/yyyy", null) : DateTime.Now;
+
+                    memberRegistration.ContactPersonName = string.IsNullOrWhiteSpace(registrationViewModel.ContactPersonName) ? string.Empty : registrationViewModel.ContactPersonName;
+                    memberRegistration.ContactPersonMobile = string.IsNullOrWhiteSpace(registrationViewModel.ContactPersonMobileNumber) ? string.Empty : registrationViewModel.ContactPersonMobileNumber;
+                    memberRegistration.ContactPersonEmail = string.IsNullOrWhiteSpace(registrationViewModel.ContactPersonEmail) ? string.Empty : registrationViewModel.ContactPersonEmail;
+                    memberRegistration.TinNumber = string.IsNullOrWhiteSpace(registrationViewModel.TinNumber) ? string.Empty : registrationViewModel.TinNumber;
+                    memberRegistration.ApplicationReferenceNumber = string.IsNullOrWhiteSpace(registrationViewModel.ApplicationReferenceNumber) ? string.Empty : registrationViewModel.ApplicationReferenceNumber;
                     memberRegistration.PanNumber = registrationViewModel.PanNumber;
                     memberRegistration.RegisteredForGst = registrationViewModel.HasGstRegistrationNumber;
-                    memberRegistration.Constitution = registrationViewModel.Constitution;
+                    registrationViewModel.HasGstRegistrationNumberString = registrationViewModel.HasGstRegistrationNumber ? "Yes" : "No";
+
+
                     memberRegistration.GSTResgistrationNumber = string.IsNullOrWhiteSpace(registrationViewModel.GstRegistrationNumber)
                                                                     ? string.Empty
                                                                     : registrationViewModel.GstRegistrationNumber.Trim();
@@ -350,9 +379,15 @@ namespace SambariEnterprises.Controllers
                     db.MemberRegistrations.Attach(memberRegistration);
                     var entry = db.Entry(memberRegistration);
                     entry.Property(e => e.CustomerName).IsModified = true;
+                    entry.Property(e => e.CustomerPhone).IsModified = true;
                     entry.Property(e => e.OwnerName).IsModified = true;
+                    entry.Property(e => e.AuthorizedPersonName).IsModified = true;
+                    entry.Property(e => e.MobileNumber).IsModified = true;
+                    entry.Property(e => e.ContactPersonName).IsModified = true;
+                    entry.Property(e => e.ContactPersonMobile).IsModified = true;
                     entry.Property(e => e.ContactPersonName).IsModified = true;
                     entry.Property(e => e.TinNumber).IsModified = true;
+                    entry.Property(e => e.PinCode).IsModified = true;
                     entry.Property(e => e.Address).IsModified = true;
                     entry.Property(e => e.DrugLicenceExpiry1).IsModified = true;
                     entry.Property(e => e.DrugLicenceExpiry2).IsModified = true;
@@ -364,6 +399,7 @@ namespace SambariEnterprises.Controllers
                     entry.Property(e => e.DrugLicenceNumber4).IsModified = true;
                     entry.Property(e => e.PanNumber).IsModified = true;
                     entry.Property(e => e.RegisteredForGst).IsModified = true;
+                    entry.Property(e => e.ApplicationReferenceNumber).IsModified = true;
                     entry.Property(e => e.Constitution).IsModified = true;
                     entry.Property(e => e.GSTResgistrationNumber).IsModified = true;
                     //entry.Property(e => e.Phone).IsModified = true;
@@ -373,10 +409,13 @@ namespace SambariEnterprises.Controllers
                     db.SaveChanges();
 
                     //EmailHelper.SendUserMail(memberRegistration.PharmacyName, member.Email);
-                    //EmailHelper.SendAdminMail(registrationViewModel);
+                    if (!Convert.ToBoolean(Session["IsSuperAdmin"]))
+                    {
+                        EmailHelper.SendAdminMail(registrationViewModel);
+                    }
 
-                    TempData["Success"] = "Succefully updated";
-                    return Redirect("/Members/RegisteredMembers");
+                    //TempData["Success"] = "Succefully updated";
+                    return Redirect("/Members/RegisteredMembers/updatesuccess");
                 }
                 catch (Exception ex)
                 {
@@ -414,6 +453,7 @@ namespace SambariEnterprises.Controllers
                         member.UserName = memberViewModel.Username;
                         member.Password = password;
                         member.HashCode = hashCode;
+                        member.UserText = SiteHelper.Base64Encode(memberViewModel.Password);
                         member.IsTempPassword = true;
 
                         db.Members.Attach(member);
@@ -422,12 +462,13 @@ namespace SambariEnterprises.Controllers
                         entry.Property(e => e.Password).IsModified = true;
                         entry.Property(e => e.HashCode).IsModified = true;
                         entry.Property(e => e.IsTempPassword).IsModified = true;
+                        entry.Property(e => e.UserText).IsModified = true;
                         db.SaveChanges();
 
                         EmailHelper.SendUserDetailsMail(memberViewModel);
 
                         TempData["Success"] = "Username and password successfully generated.";
-                        return Redirect("/Members/Index");
+                        return Redirect("/Members/Index/updatesuccess");
                     }
                 }
                 catch(Exception ex)

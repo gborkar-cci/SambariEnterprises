@@ -35,6 +35,7 @@ namespace SambariEnterprises.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<bool> IsTempPassword { get; set; }
         public string UserToken { get; set; }
+        public string UserText { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberRegistration> MemberRegistrations { get; set; }

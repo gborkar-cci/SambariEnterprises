@@ -257,6 +257,7 @@
     </Compile>
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\SiteHelper.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>SambariEnterprises.tt</DependentUpon>
     </Compile>

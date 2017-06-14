@@ -45,6 +45,8 @@
     <EntitySetMapping Name="Members">
       <EntityTypeMapping TypeName="SambariEnterprisesModel.Member">
         <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="UserText" ColumnName="UserText" />
+          <ScalarProperty Name="UserToken" ColumnName="UserToken" />
           <ScalarProperty Name="IsTempPassword" ColumnName="IsTempPassword" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />

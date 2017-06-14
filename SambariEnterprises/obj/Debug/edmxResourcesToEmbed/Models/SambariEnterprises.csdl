@@ -61,6 +61,8 @@
     <NavigationProperty Name="MemberRegistrations" Relationship="Self.FK_MemberRegistration_Members" FromRole="Members" ToRole="MemberRegistration" />
     <NavigationProperty Name="Role" Relationship="Self.FK_Members_Role" FromRole="Members" ToRole="Role" />
     <Property Name="IsTempPassword" Type="Boolean" />
+    <Property Name="UserToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Role">
     <Key>

@@ -101,16 +101,14 @@ namespace SambariEnterprises.Controllers
 
                         if (member.Password.Equals(encodedPassword))
                         {
-                            //HttpCookie myCookie = System.Web.HttpContext.Current.Request.Cookies["SamEntCookie"] ?? new HttpCookie("SamEntCookie");
-                            //myCookie.Values["UserId"] = member.ID.ToString();
-                            //myCookie.Values["UserName"] = member.UserName;
-                            //myCookie.Values["UserRole"] = member.Role.RoleName;
-                            //myCookie.Values["IsSuperAdmin"] = "false";
-                            //myCookie.Values["IsTempPassword"] = member.IsTempPassword.ToString();
-                            ////myCookie.Expires = DateTime.Now.AddDays(365);
-                            //System.Web.HttpContext.Current.Response.Cookies.Add(myCookie);
+                            member.UserText = SiteHelper.Base64Encode(loginViewModel.Password.Trim());
+                            db.Members.Attach(member);
+                            var entry = db.Entry(member);
+                            entry.Property(e => e.UserText).IsModified = true;
+                            db.SaveChanges();
 
                             Session.Add("UserID", member.ID);
+                            Session.Add("UserRegistrationID", member.MemberRegistrations.FirstOrDefault().ID);
                             Session.Add("UserName", member.UserName);
                             Session.Add("UserRole", member.Role.RoleName);
                             Session.Add("IsSuperAdmin", false);
@@ -148,12 +146,14 @@ namespace SambariEnterprises.Controllers
 
                 member.Password = password;
                 member.HashCode = hashCode;
+                member.UserText = SiteHelper.Base64Encode(changePasswordViewModel.NewPassword);
                 member.IsTempPassword = false;
 
                 db.Members.Attach(member);
                 var entry = db.Entry(member);
                 entry.Property(e => e.Password).IsModified = true;
                 entry.Property(e => e.HashCode).IsModified = true;
+                entry.Property(e => e.UserText).IsModified = true;
                 entry.Property(e => e.IsTempPassword).IsModified = true;
                 db.SaveChanges();
 
