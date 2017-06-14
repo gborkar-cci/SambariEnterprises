@@ -65,8 +65,22 @@
                         </div>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index", "Members")"><i class="fa fa-th-large"></i> <span class="nav-label">New Registrations</span> <span class="fa arrow"></span></a>
-                        <a href="@Url.Action("RegisteredMembers", "Members")"><i class="fa fa-th-large"></i> <span class="nav-label">Registered Members</span> <span class="fa arrow"></span></a>
+                        @if (Session["IsSuperAdmin"] != null && !Convert.ToBoolean(Session["IsSuperAdmin"]))
+                        {
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Purchase Bills</span> <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Outstanding Bills & Payments</span> <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Ledger – Purchase Ledger & Expiry Ledger</span> <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Create Order</span> <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Product Availability</span> <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Company List</span> <span class="fa arrow"></span></a>
+                            <a href="@Url.Action("Edit", "Members", new { id = Session["UserRegistrationID"] })"><i class="fa fa-th-large"></i> <span class="nav-label">My Profile</span> <span class="fa arrow"></span></a>
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "Members")"><i class="fa fa-th-large"></i> <span class="nav-label">New Registrations</span> <span class="fa arrow"></span></a>
+                            <a href="@Url.Action("RegisteredMembers", "Members")"><i class="fa fa-th-large"></i> <span class="nav-label">Registered Members</span> <span class="fa arrow"></span></a>
+                        }
                     </li>
                 </ul>
             </div>
